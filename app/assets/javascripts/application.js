@@ -15,3 +15,17 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function()
+{
+    var $textarea= $('textarea');
+
+    $textarea.height($textarea.get(0).scrollHeight);
+
+    $textarea.on('keyup input', function(){
+        var $this = $(this);
+        $this.height(1);
+        $this.height(this.scrollHeight);
+    });
+
+});
