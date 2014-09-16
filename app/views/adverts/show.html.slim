@@ -1,0 +1,17 @@
+p#notice
+  = notice
+p
+  strong
+    | Title:
+  = @advert.title
+p
+  strong
+    | Body:
+  = @advert.body
+p
+  strong
+    | Price:
+  = @advert.price
+= link_to 'Edit', edit_advert_path(@advert)
+|  | 
+= link_to 'Back', adverts_path

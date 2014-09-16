@@ -47,6 +47,8 @@ gem "twitter-bootstrap-rails"
 
 gem 'devise'
 
+gem 'slim-rails'
+
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 
