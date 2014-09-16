@@ -49,6 +49,10 @@ gem 'devise'
 
 gem 'slim-rails'
 
+#Use will_paginate for pagination
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
+
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 
