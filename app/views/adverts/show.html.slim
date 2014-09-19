@@ -1,17 +1,23 @@
-p#notice
-  = notice
-p
-  strong
-    | Title:
-  = @advert.title
-p
-  strong
-    | Body:
+.page-header
+  h1
+    = @advert.title
+.well
   = @advert.body
-p
-  strong
-    | Price:
-  = @advert.price
-= link_to 'Edit', edit_advert_path(@advert)
-|  | 
-= link_to 'Back', adverts_path
+div
+  strong Price
+  span.badge
+    = number_to_currency @advert.price, separator: '.', delimiter:''
+- unless @advert.images.empty?
+#myCarousel.carousel.slide
+  .carousel-inner
+    .active.item
+      = image_tag @advert.images[0].asset.url(:large)
+    - @advert.images[1...@advert.images.length].each do |t|
+      .item
+        = image_tag t.asset.url(:large)
+  a.carousel-control.left[href="#myCarousel" data-slide="prev"]
+    i.fa.fa-arrow-circle-o-left.fa-3x
+  a.carousel-control.right[href="#myCarousel" data-slide="next"]
+    i.fa.fa-arrow-circle-o-right.fa-3x
+= link_to t('Back', :default => t("helpers.links.back")), adverts_path, :class => 'btn btn-default'
+= link_to t('Edit', :default => t("helpers.links.edit")), edit_advert_path(@advert), :class => 'btn btn-default'
