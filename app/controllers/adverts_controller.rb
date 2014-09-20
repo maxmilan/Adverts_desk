@@ -1,5 +1,6 @@
 class AdvertsController < ApplicationController
   before_action :set_advert, only: [:show, :edit, :update, :destroy]
+  before_action :set_typenames, only: [:new, :edit]
   before_filter :authenticate_user!, except: [:index]
 
   # GET /adverts
@@ -68,8 +69,12 @@ class AdvertsController < ApplicationController
       @advert = Advert.find(params[:id])
     end
 
+    def set_typenames
+      @type_names = ['sell', 'buy', 'exchange', 'service', 'loan']
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def advert_params
-      params.require(:advert).permit(:title, :body, :price, images_attributes: [:asset])
+      params.require(:advert).permit(:title, :advert_type, :body, :price, images_attributes: [:asset])
     end
 end
