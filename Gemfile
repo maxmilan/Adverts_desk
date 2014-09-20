@@ -56,6 +56,10 @@ gem 'will_paginate-bootstrap'
 gem 'paperclip'
 gem 'paperclip-dropbox'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 
