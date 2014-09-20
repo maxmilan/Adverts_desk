@@ -60,6 +60,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
+gem 'state_machine'
+
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 
