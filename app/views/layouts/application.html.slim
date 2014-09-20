@@ -37,17 +37,22 @@ html[lang="en"]
           = yield
         .col-lg-3
           .well.sidebar-nav
-            h3
-              | Sidebar
-            ul.nav.nav-list
-              li.nav-header
-                | Sidebar
-              li
-                = link_to "Link1", "/path1"
-              li
-                = link_to "Link2", "/path2"
-              li
-                = link_to "Link3", "/path3"
+            - if current_user
+              h3
+                | Welcome,
+                = current_user.name
+                | !
+              ul.nav.nav-list
+                li
+                  = link_to 'Sign out', destroy_user_session_path, method: :delete
+            - else
+              h3
+                |You are guest!
+              ul.nav.nav-list
+                li
+                  = link_to 'Sign in', new_user_session_path
+                li
+                  = link_to 'Sign up', new_user_registration_path
       footer
         p &copy; Maxim Baranok 2014
         p Contacts: +375 29 890 2425
