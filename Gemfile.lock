@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (3.4.0)
     actionmailer (4.1.5)
       actionpack (= 4.1.5)
       actionview (= 4.1.5)
@@ -180,7 +181,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    state_machine (1.2.0)
     temple (0.6.8)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
@@ -213,6 +213,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   cancancan
   coffee-rails (~> 4.0.0)
   devise
@@ -233,7 +234,6 @@ DEPENDENCIES
   simple_form
   slim-rails
   spring
-  state_machine
   therubyracer
   turbolinks
   twitter-bootstrap-rails

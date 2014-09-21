@@ -60,7 +60,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
-gem 'state_machine'
+gem 'aasm'
 
 gem 'cancancan'
 
