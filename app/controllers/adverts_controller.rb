@@ -33,6 +33,7 @@ class AdvertsController < ApplicationController
   def create
     @advert = Advert.new(advert_params)
     @advert.category_id = Category.find_by_name(advert_params[:category_id]).id
+    @advert.state = "new"
 
     current_user.adverts << @advert
     current_user.save

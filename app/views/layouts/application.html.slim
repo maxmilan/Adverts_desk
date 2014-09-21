@@ -43,8 +43,12 @@ html[lang="en"]
                 = current_user.name
                 | !
               ul.nav.nav-list
-                li
-                  = link_to 'Enter personal cabinet', persons_profile_path
+                - if current_user.user?
+                  li
+                    = link_to 'Enter personal cabinet', persons_profile_path
+                - else
+                  li
+                    = link_to 'Admin panel', admin_panel_index_path
                 li
                   = link_to 'Sign out', destroy_user_session_path, method: :delete
             - else
