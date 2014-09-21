@@ -1,6 +1,9 @@
 class AdvertsController < ApplicationController
+  load_and_authorize_resource
+
   before_action :set_advert, only: [:show, :edit, :update, :destroy]
   before_action :set_typenames, only: [:new, :edit]
+  before_action :set_categories, only: [:new, :edit]
   before_filter :authenticate_user!, except: [:index]
 
   # GET /adverts
@@ -17,16 +20,19 @@ class AdvertsController < ApplicationController
   # GET /adverts/new
   def new
     @advert = Advert.new
+    @current_category_name = set_categories[0]
   end
 
   # GET /adverts/1/edit
   def edit
+    @current_category_name = @advert.category.name
   end
 
   # POST /adverts
   # POST /adverts.json
   def create
     @advert = Advert.new(advert_params)
+    @advert.category_id = Category.find_by_name(advert_params[:category_id]).id
 
     respond_to do |format|
       if @advert.save
@@ -42,8 +48,11 @@ class AdvertsController < ApplicationController
   # PATCH/PUT /adverts/1
   # PATCH/PUT /adverts/1.json
   def update
+    successfully = @advert.update(advert_params)
+    @advert.category_id = Category.find_by_name(advert_params[:category_id]).id
+    @advert.save
     respond_to do |format|
-      if @advert.update(advert_params)
+      if successfully
         format.html { redirect_to @advert, notice: 'Advert was successfully updated.' }
         format.json { render :show, status: :ok, location: @advert }
       else
@@ -73,8 +82,15 @@ class AdvertsController < ApplicationController
       @type_names = ['sell', 'buy', 'exchange', 'service', 'loan']
     end
 
+    def set_categories
+      @categories_names = []
+      Category.all.each do |category|
+        @categories_names << category.name
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def advert_params
-      params.require(:advert).permit(:title, :advert_type, :body, :price, images_attributes: [:asset])
+      params.require(:advert).permit(:title, :advert_type, :category_id, :body, :price, images_attributes: [:asset])
     end
 end

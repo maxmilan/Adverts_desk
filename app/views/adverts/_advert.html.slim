@@ -1,6 +1,9 @@
 .well
   h3
-    = link_to advert.title, advert_path(advert)
+    -if can? :read, advert
+      = link_to advert.title, advert_path(advert)
+    -else
+      = advert.title
   p
     = advert.body
   p
@@ -10,5 +13,7 @@
     = time_ago_in_words(advert.created_at)
     |  ago
   p
-    = link_to t('.edit', :default => t("helpers.links.edit")), edit_advert_path(advert), :class => 'btn btn-default btn-xs'
-    = link_to t('.destroy', :default => t("helpers.links.destroy")), advert_path(advert), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+    - if can? :edit, advert
+      = link_to t('.edit', :default => t("helpers.links.edit")), edit_advert_path(advert), :class => 'btn btn-default btn-xs'
+    - if can? :destroy, advert
+      = link_to t('.destroy', :default => t("helpers.links.destroy")), advert_path(advert), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'

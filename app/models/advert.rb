@@ -5,6 +5,8 @@ class Advert < ActiveRecord::Base
 
   has_many :images, dependent: :destroy
   belongs_to :category
+  belongs_to :user
+
   accepts_nested_attributes_for :images, :allow_destroy => true
 
 end

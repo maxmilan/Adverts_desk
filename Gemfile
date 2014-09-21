@@ -62,6 +62,8 @@ gem 'omniauth-twitter'
 
 gem 'state_machine'
 
+gem 'cancancan'
+
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 

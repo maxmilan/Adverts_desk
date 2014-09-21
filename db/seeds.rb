@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+admin = Role.create(:name => :admin)
+user = Role.create(:name => :user)
+
+admin = User.create(name: 'Admin', surname: 'Admin', email: 'admin@advert.com', password: '82368236', role: admin)
+
+category_names = ['transport','realty']
+
+category_names.each do |category|
+  Category.create(name: category)
+end

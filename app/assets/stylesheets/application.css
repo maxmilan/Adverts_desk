@@ -44,3 +44,7 @@ a:hover {
     color: black;
     text-decoration: none;
 }
+
+.action_buttons{
+    margin-top: 20px;
+}

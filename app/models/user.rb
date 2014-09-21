@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  belongs_to :role
+  has_many :adverts
+
+  before_create :create_role
+
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
   # Include default devise modules. Others available are:
@@ -57,4 +62,18 @@ class User < ActiveRecord::Base
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
+
+  def admin?
+    !self.role.nil? && self.role.id == 1
+  end
+
+  def user?
+    !self.role.nil? && self.role.id == 2
+  end
+
+private
+  def create_role
+    self.role = Role.find_by_name(:user)
+  end
+
 end
