@@ -1,7 +1,4 @@
 .page-header
   h1 Adverts
-- if can? :create, Advert
-  #new_adv_button
-    = link_to 'New', new_advert_path, :class => 'btn btn-primary'
 = render @adverts
 = will_paginate @adverts, :renderer => BootstrapPagination::Rails

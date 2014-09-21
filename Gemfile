@@ -64,6 +64,7 @@ gem 'state_machine'
 
 gem 'cancancan'
 
+gem 'pry-rails'
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 

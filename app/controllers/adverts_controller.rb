@@ -34,9 +34,11 @@ class AdvertsController < ApplicationController
     @advert = Advert.new(advert_params)
     @advert.category_id = Category.find_by_name(advert_params[:category_id]).id
 
+    current_user.adverts << @advert
+    current_user.save
     respond_to do |format|
       if @advert.save
-        format.html { redirect_to @advert, notice: 'Advert was successfully created.' }
+        format.html { redirect_to personal_cabinets_index_path, notice: 'Advert was successfully created.' }
         format.json { render :show, status: :created, location: @advert }
       else
         format.html { render :new }

@@ -46,14 +46,17 @@ class Ability
   def user_ability user
     can :read, :all
     can :create, Advert
-    can :destroy, Advert
-    can :edit, Advert
-    can :update, Advert
     can :update, User do |u|
       u == user
     end
     can :read, User do |u|
       u == user
+    end
+    can :update, Advert do |advert|
+      advert.try(:user) == user
+    end
+    can :destroy, Advert do |advert|
+      advert.try(:user) == user
     end
   end
 
