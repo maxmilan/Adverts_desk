@@ -52,3 +52,8 @@ a:hover {
 #user_info{
     margin-bottom: 30px;
 }
+
+.well.well-categories{
+    padding: 5px;
+    margin: 5px;
+}

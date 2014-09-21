@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations',omniauth_callbacks: 'omniauth_callbacks' }
 
   get '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
+
+  resources :users
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

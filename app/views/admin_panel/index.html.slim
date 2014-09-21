@@ -1,10 +1,17 @@
 h1 Administrator panel
 h2 Categories
 - @categories.each do |category|
-  ul
-  = category.name + '   '
-  = link_to 'Delete', category_path(category), method: :delete
+  .well.well-categories
+    = category.name
+    .pull-right
+      = link_to 'Delete', category_path(category), method: :delete
 = will_paginate @categories, :renderer => BootstrapPagination::Rails
 - if can? :create, Category
   #new_adv_button
     = link_to 'New', new_category_path, :class => 'btn btn-primary'
+h2 Users
+- @users.each do |user|
+  .well.well-categories
+    = "#{full_name user} (#{user.email})"
+    .pull-right
+      = link_to 'Delete', user_path(user), method: :delete

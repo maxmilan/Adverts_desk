@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to root_url }
+      format.html { redirect_to admin_panel_index_path }
       format.json { head :no_content }
     end
   end
