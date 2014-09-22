@@ -65,6 +65,8 @@ gem 'aasm'
 gem 'cancancan'
 
 gem 'pry-rails'
+
+gem 'faker'
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 

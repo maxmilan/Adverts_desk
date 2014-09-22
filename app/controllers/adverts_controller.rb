@@ -1,7 +1,7 @@
 class AdvertsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_advert, only: [:show, :edit, :update, :destroy]
+  before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate]
   before_action :set_typenames, only: [:new, :edit]
   before_action :set_categories, only: [:new, :edit]
   before_filter :authenticate_user!, except: [:index]
@@ -74,6 +74,15 @@ class AdvertsController < ApplicationController
       format.html { redirect_to adverts_url, notice: 'Advert was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def publicate
+    @advert.wait
+    @advert.save
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   private

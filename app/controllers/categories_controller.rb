@@ -10,8 +10,10 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.save
         format.html { redirect_to admin_panel_index_path, notice: 'Advert was successfully created.' }
+        format.js
       else
         format.html { render :new }
+        format.js
       end
     end
   end
@@ -19,7 +21,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to admin_panel_index_path, notice: 'Advert was successfully destroyed.' }
+      format.html { redirect_to admin_panel_index_path, notice: 'Category was successfully destroyed.' }
     end
   end
 

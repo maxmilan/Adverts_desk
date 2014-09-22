@@ -1,14 +1,11 @@
 h1 Administrator panel
 h2 Categories
-- @categories.each do |category|
-  .well.well-categories
-    = category.name
-    .pull-right
-      = link_to 'Delete', category_path(category), method: :delete
+.categories
+  = render partial: "category", collection: @categories
 = will_paginate @categories, :renderer => BootstrapPagination::Rails
 
-- if can? :create, Category
-  = simple_form_for(@category, html: {class: 'form-horizontal' }) do |f|
+- if can? :create, @category
+  = simple_form_for(@category, html: {class: 'form-horizontal' }, remote: true) do |f|
     .form-inputs
       = f.input :name
     .form-actions

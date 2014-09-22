@@ -46,6 +46,7 @@ class Ability
   def user_ability user
     can :read, :all
     can :create, Advert
+    can :publicate, Advert
     can :update, User do |u|
       u == user
     end

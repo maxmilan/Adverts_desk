@@ -1,0 +1,5 @@
+.well.well-categories
+  = category.name
+  .pull-right
+    -if can? :destroy, category
+      = link_to 'Delete', category_path(category), method: :delete

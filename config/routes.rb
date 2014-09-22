@@ -3,7 +3,13 @@ Rails.application.routes.draw do
 
   get 'persons/profile'
 
-  resources :adverts
+  # patch 'adverts/publicate'
+
+  resources :adverts do
+
+      patch :publicate, on: :member
+
+  end
   resources :categories
 
   # The priority is based upon order of creation: first created -> highest priority.

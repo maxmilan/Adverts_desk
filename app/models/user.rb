@@ -64,11 +64,11 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    !self.role.nil? && self.role.id == 1
+    !self.role.nil? && self.role.name.eql?('admin')
   end
 
   def user?
-    !self.role.nil? && self.role.id == 2
+    !self.role.nil? && self.role.name.eql?('user')
   end
 
 private
