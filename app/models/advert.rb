@@ -22,12 +22,12 @@ class Advert < ActiveRecord::Base
       transitions :from => :waiting, :to => :rejected
     end
 
-    event :wait do
-      transitions :from => [:new, :archive], :to => :waiting
+    event :accept do
+      transitions :from => :waiting, :to => :published
     end
 
-    event :publicate do
-      transitions :from => :waiting, :to => :published
+    event :wait do
+      transitions :from => [:new, :archive], :to => :waiting
     end
 
     event :archivate do

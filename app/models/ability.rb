@@ -35,8 +35,8 @@ class Ability
   def admin_ability user
     user_ability user
     can :create, Category
-    can :destroy, Category do |t|
-      t.adverts.empty?
+    can :destroy, Category do |category|
+      category.adverts.empty?
     end
     can :manage, User
 
@@ -45,8 +45,7 @@ class Ability
 
   def user_ability user
     can :read, :all
-    can :create, Advert
-    can :publicate, Advert
+    can [:create, :publicate, :accept, :reject], Advert
     can :update, User do |u|
       u == user
     end
@@ -59,6 +58,8 @@ class Ability
     can :destroy, Advert do |advert|
       advert.try(:user) == user
     end
+
+    cannot :read, :admin_panel
   end
 
   def guest_ability

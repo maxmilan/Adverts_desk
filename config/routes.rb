@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
   get 'admin_panel/index'
-
   get 'persons/profile'
 
-  # patch 'adverts/publicate'
-
   resources :adverts do
-
-      patch :publicate, on: :member
-
+    patch :publicate, on: :member
+    patch :accept, on: :member
+    patch :reject, on: :member
   end
   resources :categories
 

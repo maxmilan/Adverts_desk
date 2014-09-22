@@ -1,7 +1,7 @@
 class AdvertsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate]
+  before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate, :accept, :reject]
   before_action :set_typenames, only: [:new, :edit]
   before_action :set_categories, only: [:new, :edit]
   before_filter :authenticate_user!, except: [:index]
@@ -9,7 +9,7 @@ class AdvertsController < ApplicationController
   # GET /adverts
   # GET /adverts.json
   def index
-    @adverts = Advert.all.paginate(:page => params[:page], :per_page => 4)
+    @adverts = Advert.where(:state => :published).paginate(:page => params[:page], :per_page => 4)
   end
 
   # GET /adverts/1
@@ -82,7 +82,18 @@ class AdvertsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
 
+  def accept
+    @advert.accept
+    @advert.save
+    redirect_to admin_panel_index_path
+  end
+
+  def reject
+    @advert.reject
+    @advert.save
+    redirect_to admin_panel_index_path
   end
 
   private
