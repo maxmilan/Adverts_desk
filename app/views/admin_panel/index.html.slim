@@ -6,12 +6,23 @@ h2 Categories
     .pull-right
       = link_to 'Delete', category_path(category), method: :delete
 = will_paginate @categories, :renderer => BootstrapPagination::Rails
+
 - if can? :create, Category
-  #new_adv_button
-    = link_to 'New', new_category_path, :class => 'btn btn-primary'
+  = simple_form_for(@category, html: {class: 'form-horizontal' }) do |f|
+    .form-inputs
+      = f.input :name
+    .form-actions
+      = f.button :submit
 h2 Users
 - @users.each do |user|
   .well.well-categories
     = "#{full_name user} (#{user.email})"
     .pull-right
       = link_to 'Delete', user_path(user), method: :delete
+h2 Adverts
+- @adverts.each do |advert|
+  .well.well-categories
+    -if can? :read, advert
+      = link_to advert.title, advert_path(advert)
+    -else
+      = advert.title

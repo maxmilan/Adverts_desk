@@ -27,15 +27,15 @@ class Advert < ActiveRecord::Base
     end
 
     event :publicate do
-      transitions :from => :waiting, :to => :publiched
-    end
-
-    event :archivate do
-      transitions :from => :published, :to => :archive
+      transitions :from => :waiting, :to => :published
     end
 
     event :archivate do
       transitions :from => [:new, :waiting, :rejected, :published], :to => :archive
+    end
+
+    event :refresh do
+      transitions :from => [:new, :waiting, :published, :rejected, :archive], :to => :new
     end
 
   end
