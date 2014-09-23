@@ -67,6 +67,9 @@ gem 'cancancan'
 gem 'pry-rails'
 
 gem 'faker'
+
+gem 'hirb'
+gem 'annotate'
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 

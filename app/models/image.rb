@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: images
+#
+#  id                 :integer          not null, primary key
+#  advert_id          :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#  asset_file_name    :string(255)
+#  asset_content_type :string(255)
+#  asset_file_size    :integer
+#  asset_updated_at   :datetime
+#
+
 class Image < ActiveRecord::Base
   belongs_to :advert
   has_attached_file :asset,

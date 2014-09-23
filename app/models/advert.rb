@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: adverts
+#
+#  id          :integer          not null, primary key
+#  title       :string(255)
+#  body        :text
+#  price       :decimal(, )
+#  created_at  :datetime
+#  updated_at  :datetime
+#  state       :string(255)
+#  advert_type :string(255)
+#  category_id :integer
+#  user_id     :integer
+#
+
 class Advert < ActiveRecord::Base
   include AASM
 
