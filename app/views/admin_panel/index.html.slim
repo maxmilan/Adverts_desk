@@ -13,7 +13,7 @@ h2 Categories
 h2 Users
 - @users.each do |user|
   .well.well-categories
-    = "#{full_name user} (#{user.email})"
+    = link_to user_info(user), user_path(user)
     .pull-right
       = link_to 'Delete', user_path(user), method: :delete
 h2 Unpublished adverts

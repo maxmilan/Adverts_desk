@@ -1,0 +1,9 @@
+h1
+  = full_name user
+#user_info
+  h2 Information
+  |Email:
+  = ' ' + user.email
+  p
+    |Registrated
+    = ' ' + time_ago_in_words(user.created_at) + ' ago'

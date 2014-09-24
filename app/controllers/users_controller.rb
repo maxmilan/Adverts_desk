@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:update, :destroy]
+  before_filter :authenticate_user!, except: [:index]
+  before_action :set_user, only: [:update, :destroy, :show]
 
   # PATCH/PUT /users/:id.:format
   def update
@@ -35,6 +36,10 @@ class UsersController < ApplicationController
         @show_errors = true
       end
     end
+  end
+
+  def show
+    @adverts = @user.adverts.where(state: [:rejected, :published, :waiting])
   end
 
   private

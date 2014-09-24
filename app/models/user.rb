@@ -22,7 +22,7 @@
 
 class User < ActiveRecord::Base
   belongs_to :role
-  has_many :adverts
+  has_many :adverts, dependent: :destroy
 
   before_create :create_role
 

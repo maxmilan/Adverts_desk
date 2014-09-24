@@ -1,1 +1,2 @@
-$('#<%= @advert.id %>').fadeOut('slow');
+var $div_name = <%= 'publicate_' + @advert.id.to_s %>
+$($div_name).fadeOut('slow');

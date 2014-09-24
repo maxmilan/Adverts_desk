@@ -1,6 +1,6 @@
 namespace :advert_generators do
   desc "Generate adverts"
-  task :generate_adverts  => :environment do
+  task :generate  => :environment do
     number = 3
     types = ['sell', 'buy', 'exchange', 'service', 'loan']
     categories = Category.pluck(:name)
@@ -15,9 +15,14 @@ namespace :advert_generators do
   end
 
   desc "Delete adverts"
-  task :delete_adverts => :environment do
+  task :delete => :environment do
     Advert.all.each do |advert|
       advert.destroy
     end
+  end
+
+  desc "Update crontab"
+  task :update_crontab => :environment do
+    system( 'whenever --update-crontab board' )
   end
 end

@@ -1,7 +1,7 @@
 class AdvertsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate, :accept, :reject]
+  before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate, :accept, :reject, :archivate]
   before_action :set_typenames, only: [:new, :edit]
   before_action :set_categories, only: [:new, :edit]
   before_filter :authenticate_user!, except: [:index]
@@ -9,7 +9,8 @@ class AdvertsController < ApplicationController
   # GET /adverts
   # GET /adverts.json
   def index
-    @adverts = Advert.where(:state => :published).paginate(:page => params[:page], :per_page => 4)
+    @search = Advert.where(:state => :published).search(params[:q])
+    @adverts = @search.result.paginate(:page => params[:page], :per_page => 7)
   end
 
   # GET /adverts/1
@@ -39,7 +40,7 @@ class AdvertsController < ApplicationController
     current_user.save
     respond_to do |format|
       if @advert.save
-        format.html { redirect_to persons_profile_path, notice: 'Advert was successfully created.' }
+        format.html { redirect_to persons_profile_url, notice: 'Advert was successfully created.' }
         format.json { render :show, status: :created, location: @advert }
       else
         format.html { render :new }
@@ -57,7 +58,7 @@ class AdvertsController < ApplicationController
     @advert.save
     respond_to do |format|
       if successfully
-        format.html { redirect_to @advert, notice: 'Advert was successfully updated.' }
+        format.html { redirect_to persons_profile_url, notice: 'Advert was successfully updated.' }
         format.json { render :show, status: :ok, location: @advert }
       else
         format.html { render :edit }
@@ -71,13 +72,21 @@ class AdvertsController < ApplicationController
   def destroy
     @advert.destroy
     respond_to do |format|
-      format.html { redirect_to adverts_url, notice: 'Advert was successfully destroyed.' }
+      format.html { redirect_to persons_profile_url, notice: 'Advert was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   def publicate
     @advert.wait
+    @advert.save
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def archivate
+    @advert.archivate
     @advert.save
     respond_to do |format|
       format.js

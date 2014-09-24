@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :adverts do
     patch :publicate, on: :member
+    patch :archivate, on: :member
     patch :accept, on: :member
     patch :reject, on: :member
   end
@@ -19,7 +20,9 @@ Rails.application.routes.draw do
 
   get '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
-  resources :users
+  resources :users do
+    patch :show, on: :member
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

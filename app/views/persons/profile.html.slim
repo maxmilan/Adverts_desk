@@ -1,16 +1,8 @@
 .page-header
-  h1
-    = full_name current_user
-#user_info
-  h2 Information
-  |Email:
-  = ' ' + current_user.email
-  p
-    |Registrated
-    = ' ' + time_ago_in_words(current_user.created_at) + ' ago'
+= render partial: 'person', locals: {user: current_user}
 h2 Adverts
 - if can? :create, Advert
   #new_adv_button
     = link_to 'New', new_advert_path, :class => 'btn btn-primary'
-= render @adverts
+= render partial: 'persons/advert', collection: @adverts
 = will_paginate @adverts, :renderer => BootstrapPagination::Rails

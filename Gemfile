@@ -72,6 +72,8 @@ gem 'hirb'
 gem 'annotate'
 
 gem 'whenever', :require => false
+
+gem 'ransack'
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 

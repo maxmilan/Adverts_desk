@@ -6,14 +6,20 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+1.2.1
 
 * System dependencies
 
 * Configuration
 
 * Database creation
+<tt>rake db:migrate</tt>
 
 * Database initialization
+<tt>rake db:seed</tt>
+
+* Crontab configuration
+<tt>rake advert_generators:update_crontab</tt>
 
 * How to run the test suite
 
