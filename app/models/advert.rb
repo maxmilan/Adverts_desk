@@ -46,7 +46,7 @@ class Advert < ActiveRecord::Base
       transitions :from => [:new, :archive], :to => :waiting
     end
 
-    event :archivate do
+    event :send_to_archive do
       transitions :from => [:new, :waiting, :rejected, :published], :to => :archive
     end
 

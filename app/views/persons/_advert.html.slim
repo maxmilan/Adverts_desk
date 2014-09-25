@@ -6,6 +6,10 @@
       = advert.title
     .pull-right
       = advert.state
+  - if advert.rejected?
+    strong Reject reason
+    .alert.alert-danger
+      = advert.reject_reason
   p
     = advert.body
   p

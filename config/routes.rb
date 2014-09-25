@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     patch :archivate, on: :member
     patch :accept, on: :member
     patch :reject, on: :member
+    patch :reject_reason, on: :member
     collection { get :search}
   end
 

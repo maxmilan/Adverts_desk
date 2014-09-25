@@ -17,7 +17,7 @@ class Ability
   def admin_ability user
     user_ability user
     can :read, :admin_panel
-    can [:accept, :reject], Advert
+    can [:accept, :reject, :reject_reason], Advert
     can :create, Category
     can :destroy, Category do |category|
       category.adverts.empty?

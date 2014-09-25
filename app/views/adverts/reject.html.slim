@@ -1,0 +1,3 @@
+= simple_form_for @advert,url: reject_reason_advert_path(id: @advert) do |f|
+  = f.input :reject_reason, as: :text
+  = f.submit 'Reject'

@@ -1,7 +1,7 @@
 class AdvertsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate, :accept, :reject, :archivate]
+  before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate, :accept, :reject, :reject_reason, :archivate]
   before_action :set_typenames, only: [:new, :edit, :index]
   before_action :set_categories, only: [:new, :edit, :index]
   before_filter :authenticate_user!, except: [:index]
@@ -86,7 +86,7 @@ class AdvertsController < ApplicationController
   end
 
   def archivate
-    @advert.archivate
+    @advert.send_to_archive
     @advert.save
     respond_to do |format|
       format.js
@@ -99,10 +99,15 @@ class AdvertsController < ApplicationController
     redirect_to admin_panel_index_path
   end
 
-  def reject
+  def reject_reason
+    @advert.update_attribute(:reject_reason, params[:advert][:reject_reason])
     @advert.reject
     @advert.save
     redirect_to admin_panel_index_path
+  end
+
+  def reject
+
   end
 
   def search
