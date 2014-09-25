@@ -4,12 +4,18 @@
       = link_to advert.title, advert_path(advert)
     -else
       = advert.title
+  span.label.label-info
+    = advert.category.name
+  span.label.label-success
+    = advert.advert_type
   p
-    = advert.body
+    = short_text advert.body
   p
-    = number_to_currency advert.price, separator: '.', delimiter:''
+    strong
+      = number_to_currency advert.price, separator: '.', delimiter:''
   p
-    | Created 
-    = ' ' + time_ago_in_words(advert.created_at)
-    |  ago by
-    = link_to ' ' + full_name(advert.user), user_path(advert.user)
+    i
+      | Created
+      = ' ' + time_ago_in_words(advert.created_at)
+      |  ago by
+      = link_to ' ' + full_name(advert.user), user_path(advert.user)

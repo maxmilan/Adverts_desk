@@ -49,3 +49,12 @@ input.search-query {
     -moz-box-shadow: 0 0 3px rgba(82, 168, 236, 0.8);
     box-shadow: 0 0 3px rgba(82, 168, 236, 0.8);
 }
+
+.text-error {
+    color: #b94a48;
+}
+
+a.text-error:hover,
+a.text-error:focus {
+    color: #953b39;
+}

@@ -36,6 +36,7 @@ class UsersController < ApplicationController
         @show_errors = true
       end
     end
+    redirect_to root_path
   end
 
   def show

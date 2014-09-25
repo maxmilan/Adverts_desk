@@ -74,3 +74,8 @@ a:hover {
 #query.search-query{
     margin-top: 15px;
 }
+
+table.user_table td{
+    padding-right: 30px;
+    padding-bottom: 10px;
+}

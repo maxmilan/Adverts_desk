@@ -2,8 +2,24 @@ h1
   = full_name user
 #user_info
   h2 Information
-  |Email:
-  = ' ' + user.email
-  p
-    |Registrated
-    = ' ' + time_ago_in_words(user.created_at) + ' ago'
+table.table
+  tr
+    td
+      strong Name
+    td
+      = user.name
+  tr
+    td
+      strong Surname
+    td
+      = user.surname
+  tr
+    td
+      strong Email
+    td
+      = user.email
+  tr
+    td
+      strong Registrated
+    td
+      = time_ago_in_words(user.created_at) + ' ago'

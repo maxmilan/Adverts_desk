@@ -7,11 +7,15 @@
     .pull-right
       = advert.state
   - if advert.rejected?
-    strong Reject reason
-    .alert.alert-danger
+    p.text-error
+      strong Reject reason:
       = advert.reject_reason
+  span.label.label-info
+    = advert.category.name
+  span.label.label-success
+    = advert.advert_type
   p
-    = advert.body
+    = short_text advert.body
   p
     = number_to_currency advert.price, separator: '.', delimiter:''
   p
