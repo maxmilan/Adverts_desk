@@ -5,3 +5,47 @@
   To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
   =require twitter-bootstrap-static/fontawesome
   */
+input.search-query {
+    padding-right: 14px;
+    padding-right: 4px \9;
+    padding-left: 14px;
+    padding-left: 4px \9;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+    margin-bottom: 0;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.navbar-search {
+    position: relative;
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.navbar-search .search-query {
+    padding: 4px 14px;
+    margin-bottom: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.search-query:focus,
+.search-query.focused {
+    padding: 5px 15px;
+    color: #333333;
+    text-shadow: 0 1px 0 #ffffff;
+    background-color: #ffffff;
+    border: 0;
+    outline: 0;
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0 3px rgba(82, 168, 236, 0.8);
+    box-shadow: 0 0 3px rgba(82, 168, 236, 0.8);
+}

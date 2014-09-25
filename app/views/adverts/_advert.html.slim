@@ -11,4 +11,5 @@
   p
     | Created 
     = ' ' + time_ago_in_words(advert.created_at)
-    |  ago
+    |  ago by
+    = link_to ' ' + full_name(advert.user), user_path(advert.user)

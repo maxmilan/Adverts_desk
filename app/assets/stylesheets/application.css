@@ -61,3 +61,16 @@ a:hover {
 .btn{
     margin: 1px;
 }
+
+#q_advert_type_eq{
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+#q_category_name_eq{
+    margin-left: 3px;
+}
+
+#query.search-query{
+    margin-top: 15px;
+}

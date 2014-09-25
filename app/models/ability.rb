@@ -48,6 +48,7 @@ class Ability
     can :archivate, Advert do |advert|
       advert.try(:user) == user
     end
+    can :search, Advert
 
     cannot :read, :admin_panel
   end

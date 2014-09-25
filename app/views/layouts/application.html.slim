@@ -23,9 +23,9 @@ html[lang="en"]
           span.icon-bar
         = link_to 'AdvertsDesk', root_path, class:'navbar-brand'
         .navbar-collapse.collapse.navbar-responsive-collapse
-          ul.nav.navbar-nav
-            li
-              = link_to "Link1", "/path1"
+          - if can? :search, Advert
+            = form_tag search_adverts_path, method: :get, class: "navbar-search pull-right" do
+              = text_field_tag :query, params[:query], class: "search-query"
     .container
       .row
         .col-lg-9

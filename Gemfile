@@ -64,12 +64,10 @@ gem 'aasm'
 
 gem 'cancancan'
 
-gem 'pry-rails'
-
-gem 'faker'
-
-gem 'hirb'
-gem 'annotate'
+gem 'pry-rails', group: [:test, :development]
+gem 'faker', group: [:test, :development]
+gem 'hirb', group: [:test, :development]
+gem 'annotate', group: [:test, :development]
 
 gem 'whenever', :require => false
 

@@ -2,8 +2,8 @@ class AdvertsController < ApplicationController
   load_and_authorize_resource
 
   before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate, :accept, :reject, :archivate]
-  before_action :set_typenames, only: [:new, :edit]
-  before_action :set_categories, only: [:new, :edit]
+  before_action :set_typenames, only: [:new, :edit, :index]
+  before_action :set_categories, only: [:new, :edit, :index]
   before_filter :authenticate_user!, except: [:index]
 
   # GET /adverts
@@ -103,6 +103,10 @@ class AdvertsController < ApplicationController
     @advert.reject
     @advert.save
     redirect_to admin_panel_index_path
+  end
+
+  def search
+
   end
 
   private

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     patch :archivate, on: :member
     patch :accept, on: :member
     patch :reject, on: :member
+    collection { get :search}
   end
+
   resources :categories
 
   # The priority is based upon order of creation: first created -> highest priority.
