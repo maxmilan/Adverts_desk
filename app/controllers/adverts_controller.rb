@@ -4,6 +4,7 @@ class AdvertsController < ApplicationController
   before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate, :accept, :reject, :reject_reason, :archivate]
   before_action :set_typenames, only: [:new, :edit, :index]
   before_action :set_categories, only: [:new, :edit, :index]
+  before_action :initialize_logger
   before_filter :authenticate_user!, except: [:index]
 
   # GET /adverts
@@ -56,6 +57,7 @@ class AdvertsController < ApplicationController
     @advert.category_id = Category.find_by_name(advert_params[:category_id]).id
     @advert.refresh
     @advert.save
+    @advert_logger.info("#{current_user.email} updated #{@advert.title}")
     respond_to do |format|
       if successfully
         format.html { redirect_to persons_profile_url, notice: 'Advert was successfully updated.' }
@@ -80,6 +82,7 @@ class AdvertsController < ApplicationController
   def publicate
     @advert.wait
     @advert.save
+    @advert_logger.info("#{current_user.email} published #{@advert.title}")
     respond_to do |format|
       format.js
     end
@@ -88,6 +91,7 @@ class AdvertsController < ApplicationController
   def archivate
     @advert.send_to_archive
     @advert.save
+    @advert_logger.info("#{current_user.email} archivated #{@advert.title}")
     respond_to do |format|
       format.js
     end
@@ -96,6 +100,7 @@ class AdvertsController < ApplicationController
   def accept
     @advert.accept
     @advert.save
+    @advert_logger.info("Admin accepted #{@advert.title}")
     redirect_to admin_panel_index_path
   end
 
@@ -103,6 +108,7 @@ class AdvertsController < ApplicationController
     @advert.update_attribute(:reject_reason, params[:advert][:reject_reason])
     @advert.reject
     @advert.save
+    @advert_logger.info("Admin rejected #{@advert.title}")
     redirect_to admin_panel_index_path
   end
 
@@ -134,5 +140,9 @@ class AdvertsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def advert_params
       params.require(:advert).permit(:title, :advert_type, :category_id, :body, :price, images_attributes: [:asset])
+    end
+
+    def initialize_logger
+      @advert_logger ||= Logger.new("#{Rails.root}/log/notifications.log")
     end
 end
