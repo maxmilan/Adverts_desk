@@ -62,13 +62,32 @@ class User < ActiveRecord::Base
 
       # Create the user if it's a new registration
       if user.nil?
-        user = User.new(
-            name: auth.extra.raw_info.name,
-            surname: "Undefiened",
-            #username: auth.info.nickname || auth.uid,
-            email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-            password: Devise.friendly_token[0,20]
-        )
+        if auth.provider.eql? "facebook"
+          user = User.new(
+              name: auth.extra.raw_info.first_name,
+              surname: auth.extra.raw_info.last_name,
+              #username: auth.info.nickname || auth.uid,
+              email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+              password: Devise.friendly_token[0,20]
+          )
+        elsif auth.provider.eql? "twitter"
+          @name = auth.extra.raw_info.name
+          user = User.new(
+              name: @name[0,@name.index(' ')],
+              surname: @name[@name.index(' ') + 1, @name.length - 1],
+              #username: auth.info.nickname || auth.uid,
+              email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+              password: Devise.friendly_token[0,20]
+          )
+        elsif auth.provider.eql? "vkontakte"
+          user = User.new(
+              name: auth.extra.raw_info.first_name,
+              surname: auth.extra.raw_info.last_name,
+              #username: auth.info.nickname || auth.uid,
+              email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+              password: Devise.friendly_token[0,20]
+          )
+        end
         user.save!
       end
     end

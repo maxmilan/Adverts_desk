@@ -259,4 +259,5 @@ Devise.setup do |config|
 
   config.omniauth :facebook, "718238801580351", "4865c2ebff16577c0ac9f07a7a8ace08"
   config.omniauth :twitter, "VJTe4IPLY5BJcHUphQ4PYzKrj", "DmV1YHUfEYt7w3K4HywQH7gsdgu0co6QO3I13bpL1M5uAIeG2o"
+  config.omniauth :vkontakte, "4564787", "NZ4xlcHcOAfOCarsw6pr"
 end

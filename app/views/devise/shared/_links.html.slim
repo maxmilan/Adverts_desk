@@ -8,7 +8,8 @@
     - if devise_mapping.omniauthable?
       = link_to '<i class="fa fa-facebook fa-3x"></i>'.html_safe + ' Sign in with facebook', omniauth_authorize_path(resource_name, :facebook), class:'imaged_link'
       = link_to '<i class="fa fa-twitter fa-3x"></i>'.html_safe + ' Sign in with twitter', omniauth_authorize_path(resource_name, :twitter), class:'imaged_link'
-      br
+      = link_to '<i class="fa fa-vk fa-3x"></i>'.html_safe + ' Sign in with vkontakte', omniauth_authorize_path(resource_name, :vkontakte), class:'imaged_link'
+    br
   #registration
     h3
       | If you can't sign in
