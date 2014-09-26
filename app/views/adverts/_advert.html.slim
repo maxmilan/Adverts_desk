@@ -4,10 +4,11 @@
       = link_to advert.title, advert_path(advert)
     -else
       = advert.title
-  span.label.label-info
-    = advert.category.name
-  span.label.label-success
-    = advert.advert_type
+  #category_type_bar
+    span.label.label-info
+      = advert.category.name
+    span.label.label-success
+      = advert.advert_type
   p
     = short_text advert.body
   p

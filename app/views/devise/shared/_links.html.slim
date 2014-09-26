@@ -6,22 +6,7 @@
     h3
       | Or you can sign in with social networks
     - if devise_mapping.omniauthable?
-      = link_to '<i class="fa fa-facebook fa-3x"></i>'.html_safe + ' Sign in with facebook', omniauth_authorize_path(resource_name, :facebook), class:'imaged_link'
-      = link_to '<i class="fa fa-twitter fa-3x"></i>'.html_safe + ' Sign in with twitter', omniauth_authorize_path(resource_name, :twitter), class:'imaged_link'
-      = link_to '<i class="fa fa-vk fa-3x"></i>'.html_safe + ' Sign in with vkontakte', omniauth_authorize_path(resource_name, :vkontakte), class:'imaged_link'
-    br
-  #registration
-    h3
-      | If you can't sign in
-    - if devise_mapping.registerable? && controller_name != 'registrations'
-      = link_to "Sign up", new_registration_path(resource_name)
-      br
-  - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-    = link_to "Forgot your password?", new_password_path(resource_name)
-    br
-  - if devise_mapping.confirmable? && controller_name != 'confirmations'
-    = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
-    br
-  - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
-    = link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name)
-    br
+      = link_to '<i class="fa fa-facebook fa-3x"></i>'.html_safe, omniauth_authorize_path(resource_name, :facebook), class:'imaged_link'
+      = link_to '<i class="fa fa-twitter fa-3x"></i>'.html_safe, omniauth_authorize_path(resource_name, :twitter), class:'imaged_link'
+      = link_to '<i class="fa fa-vk fa-3x"></i>'.html_safe, omniauth_authorize_path(resource_name, :vkontakte), class:'imaged_link'
+      = link_to '<i class="fa fa-google fa-3x"></i>'.html_safe, omniauth_authorize_path(resource_name, :google_oauth2), class:'imaged_link'

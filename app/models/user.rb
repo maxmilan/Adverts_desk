@@ -87,6 +87,14 @@ class User < ActiveRecord::Base
               email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
               password: Devise.friendly_token[0,20]
           )
+        elsif auth.provider.eql? "google_oauth2"
+          user = User.new(
+              name: auth.extra.raw_info.given_name,
+              surname: auth.extra.raw_info.family_name,
+              #username: auth.info.nickname || auth.uid,
+              email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+              password: Devise.friendly_token[0,20]
+          )
         end
         user.save!
       end

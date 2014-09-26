@@ -101,7 +101,9 @@ class AdvertsController < ApplicationController
     @advert.accept
     @advert.save
     @advert_logger.info("Admin accepted #{@advert.title}")
-    redirect_to admin_panel_index_path
+    respond_to do |format|
+      format.js
+    end
   end
 
   def reject_reason

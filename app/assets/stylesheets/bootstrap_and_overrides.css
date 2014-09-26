@@ -58,3 +58,7 @@ a.text-error:hover,
 a.text-error:focus {
     color: #953b39;
 }
+
+.checkbox_label{
+    margin-left: 5px;
+}
