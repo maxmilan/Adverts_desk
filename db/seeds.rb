@@ -8,7 +8,9 @@
 admin = Role.create(:name => "admin")
 user = Role.create(:name => "user")
 
-admin = User.create(name: 'Admin', surname: 'Admin', email: 'admin@advert.com', password: '82368236', role: admin)
+@admin = User.create(name: 'Admin', surname: 'Admin', email: 'admin@advert.com', password: '82368236')
+@admin.role_id = admin.id
+@admin.save
 
 category_names = ['transport','realty']
 

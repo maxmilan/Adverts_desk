@@ -119,7 +119,11 @@ class AdvertsController < ApplicationController
   end
 
   def search
-
+    unless params[:query].empty?
+      @adverts = Advert.full_search(params)
+    else
+      @adverts = []
+    end
   end
 
   private

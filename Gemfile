@@ -75,6 +75,9 @@ gem 'annotate', group: [:test, :development]
 gem 'whenever', :require => false
 
 gem 'ransack'
+
+gem 'tire'
+
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 

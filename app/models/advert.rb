@@ -2,20 +2,24 @@
 #
 # Table name: adverts
 #
-#  id          :integer          not null, primary key
-#  title       :string(255)
-#  body        :text
-#  price       :decimal(, )
-#  created_at  :datetime
-#  updated_at  :datetime
-#  state       :string(255)
-#  advert_type :string(255)
-#  category_id :integer
-#  user_id     :integer
+#  id            :integer          not null, primary key
+#  title         :string(255)
+#  body          :text
+#  price         :decimal(, )
+#  created_at    :datetime
+#  updated_at    :datetime
+#  state         :string(255)
+#  advert_type   :string(255)
+#  category_id   :integer
+#  user_id       :integer
+#  reject_reason :text
 #
 
 class Advert < ActiveRecord::Base
   include AASM
+
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
 
   validates :title, presence: true
   validates :body, presence: true
@@ -63,6 +67,13 @@ class Advert < ActiveRecord::Base
         advert.save
       end
     end
+  end
+
+  def self.full_search params
+    @result = tire.search(load: true) do
+      query { string params[:query]} unless params[:query].empty?
+    end
+    @result.select{|advert| advert.published?}
   end
 
 end
