@@ -63,7 +63,7 @@ class Advert < ActiveRecord::Base
   def self.archivate_old_adverts
     Advert.all.each do |advert|
       if advert.published? && (advert.updated_at < Time.now.days_ago(1))
-        advert.archivate
+        advert.send_to_archive
         advert.save
       end
     end

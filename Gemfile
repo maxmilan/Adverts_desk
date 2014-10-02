@@ -79,7 +79,12 @@ gem 'ransack'
 gem 'tire'
 
 gem 'rspec-rails', group: [:test, :development]
-gem 'capybara', group: [:test, :development]
+
+group :test do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+end
 
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
