@@ -78,6 +78,9 @@ gem 'ransack'
 
 gem 'tire'
 
+gem 'rspec-rails', group: [:test, :development]
+gem 'capybara', group: [:test, :development]
+
 # Версию Ruby следует указывать в конце файла
 ruby "2.1.2"
 
