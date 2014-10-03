@@ -53,13 +53,13 @@ class AdvertsController < ApplicationController
   # PATCH/PUT /adverts/1
   # PATCH/PUT /adverts/1.json
   def update
-    successfully = @advert.update(advert_params)
+    @advert.update(advert_params)
     @advert.category_id = Category.find_by_name(advert_params[:category_id]).id
     @advert.refresh
-    @advert.save
-    @advert_logger.info("#{current_user.email} updated #{@advert.title}")
+    successfully = @advert.save
     respond_to do |format|
       if successfully
+        @advert_logger.info("#{current_user.email} updated #{@advert.title}")
         format.html { redirect_to persons_profile_url, notice: 'Advert was successfully updated.' }
         format.json { render :show, status: :ok, location: @advert }
       else

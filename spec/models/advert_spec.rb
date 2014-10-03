@@ -32,6 +32,23 @@ RSpec.describe Advert, :type => :model do
     @advert.should be_valid
   end
 
+  it 'should delete advert' do
+    @advert.destroy
+    @user.adverts.include?(@advert).should_not == true
+  end
+
+  it 'should be invalid without title' do
+    @advert.title = nil
+    @advert.should_not be_valid
+    @advert.title = ''
+    @advert.should_not be_valid
+  end
+
+  it 'should have normal price' do
+    @advert.price = -1
+    @advert.should_not be_valid
+  end
+
   after(:each) do
     @advert.destroy
     @user.destroy

@@ -4,8 +4,8 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    User.create sign_up_params
-    redirect_to root_path
+    super
+    @user = User.create sign_up_params
   end
 
   def update

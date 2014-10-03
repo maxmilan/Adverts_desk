@@ -1,0 +1,22 @@
+
+[1mFrom:[0m /home/max/RailsProject/Adverts_desk/app/controllers/adverts_controller.rb @ line 60 AdvertsController#update:
+
+    [1;34m55[0m: [32mdef[0m [1;34mupdate[0m
+    [1;34m56[0m:   @advert.update(advert_params)
+    [1;34m57[0m:   @advert.category_id = [1;34;4mCategory[0m.find_by_name(advert_params[[33m:category_id[0m]).id
+    [1;34m58[0m:   @advert.refresh
+    [1;34m59[0m:   successfully = @advert.save
+ => [1;34m60[0m:   binding.pry
+    [1;34m61[0m:   respond_to [32mdo[0m |format|
+    [1;34m62[0m:     [32mif[0m successfully
+    [1;34m63[0m:       @advert_logger.info([31m[1;31m"[0m[31m#{current_user.email}[0m[31m updated #{@advert.title}[0m[31m[1;31m"[0m[31m[0m)
+    [1;34m64[0m:       format.html { redirect_to persons_profile_url, [35mnotice[0m: [31m[1;31m'[0m[31mAdvert was successfully updated.[1;31m'[0m[31m[0m }
+    [1;34m65[0m:       format.json { render [33m:show[0m, [35mstatus[0m: [33m:ok[0m, [35mlocation[0m: @advert }
+    [1;34m66[0m:     [32melse[0m
+    [1;34m67[0m:       binding.pry
+    [1;34m68[0m:       format.html { render [33m:edit[0m }
+    [1;34m69[0m:       format.json { render [35mjson[0m: @advert.errors, [35mstatus[0m: [33m:unprocessable_entity[0m }
+    [1;34m70[0m:     [32mend[0m
+    [1;34m71[0m:   [32mend[0m
+    [1;34m72[0m: [32mend[0m
+

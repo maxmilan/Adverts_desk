@@ -1,6 +1,4 @@
-- if controller_name != 'sessions'
-  = link_to "Sign in", new_session_path(resource_name)
-- else
+- if controller_name == 'sessions'
   br
   #social_networks
     h3

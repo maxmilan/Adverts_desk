@@ -23,7 +23,7 @@ class Advert < ActiveRecord::Base
 
   validates :title, presence: true
   validates :body, presence: true
-  validates :price, presence: true, numericality: {greater_than: 0 }
+  validates :price, presence: true, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, numericality: {greater_than: 0 }
 
   has_many :images, dependent: :destroy
   belongs_to :category

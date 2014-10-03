@@ -5,8 +5,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
-2.1.2
+* Ruby version 2.1.2
 
 * System dependencies
 
@@ -22,8 +21,10 @@ Things you may want to cover:
 <tt>rake advert_generators:update_crontab</tt>
 
 * How to run the test suite
+<tt>rspec</tt>
 
 * Services (job queues, cache servers, search engines, etc.)
+Using search engine ElasticSearch
 
 * Deployment instructions
 
