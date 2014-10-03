@@ -2,8 +2,7 @@ class AdvertsController < ApplicationController
   load_and_authorize_resource
 
   before_action :set_advert, only: [:show, :edit, :update, :destroy, :publicate, :accept, :reject, :reject_reason, :archivate]
-  before_action :set_typenames, only: [:new, :edit, :index]
-  before_action :set_categories, only: [:new, :edit, :index]
+  before_action :set_typenames, only: [:new, :edit, :index, :update, :create]
   before_action :initialize_logger
   before_filter :authenticate_user!, except: [:index]
 
@@ -22,19 +21,16 @@ class AdvertsController < ApplicationController
   # GET /adverts/new
   def new
     @advert = Advert.new
-    @current_category_name = set_categories[0]
   end
 
   # GET /adverts/1/edit
   def edit
-    @current_category_name = @advert.category.name
   end
 
   # POST /adverts
   # POST /adverts.json
   def create
     @advert = Advert.new(advert_params)
-    @advert.category_id = Category.find_by_name(advert_params[:category_id]).id
     @advert.state = "new"
 
     current_user.adverts << @advert
@@ -44,7 +40,7 @@ class AdvertsController < ApplicationController
         format.html { redirect_to persons_profile_url, notice: 'Advert was successfully created.' }
         format.json { render :show, status: :created, location: @advert }
       else
-        format.html { render :new }
+        format.html { render action: 'new' }
         format.json { render json: @advert.errors, status: :unprocessable_entity }
       end
     end
@@ -54,7 +50,6 @@ class AdvertsController < ApplicationController
   # PATCH/PUT /adverts/1.json
   def update
     @advert.update(advert_params)
-    @advert.category_id = Category.find_by_name(advert_params[:category_id]).id
     @advert.refresh
     successfully = @advert.save
     respond_to do |format|
@@ -63,7 +58,7 @@ class AdvertsController < ApplicationController
         format.html { redirect_to persons_profile_url, notice: 'Advert was successfully updated.' }
         format.json { render :show, status: :ok, location: @advert }
       else
-        format.html { render :edit }
+        format.html { render action: 'edit' }
         format.json { render json: @advert.errors, status: :unprocessable_entity }
       end
     end
@@ -134,13 +129,6 @@ class AdvertsController < ApplicationController
 
     def set_typenames
       @type_names = ['sell', 'buy', 'exchange', 'service', 'loan']
-    end
-
-    def set_categories
-      @categories_names = []
-      Category.all.each do |category|
-        @categories_names << category.name
-      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -44,8 +44,26 @@ RSpec.describe Advert, :type => :model do
     @advert.should_not be_valid
   end
 
+  it 'should be invalid without body' do
+    @advert.body = nil
+    @advert.should_not be_valid
+    @advert.body = ''
+    @advert.should_not be_valid
+  end
+
+  it 'should have category' do
+    @advert.category = nil
+    @advert.should_not be_valid
+  end
+
   it 'should have normal price' do
     @advert.price = -1
+    @advert.should_not be_valid
+  end
+
+  it 'should have correct type' do
+    @advert.should be_valid
+    @advert.advert_type = "unknown"
     @advert.should_not be_valid
   end
 
@@ -53,6 +71,8 @@ RSpec.describe Advert, :type => :model do
     @advert.destroy
     @user.destroy
     @admin.destroy
+    @admin_role.destroy
+    @user_role.destroy
   end
 
 end

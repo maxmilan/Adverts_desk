@@ -14,6 +14,7 @@
 
 class Image < ActiveRecord::Base
   belongs_to :advert
+
   has_attached_file :asset,
                     :storage => :dropbox,
                     :dropbox_credentials => "#{Rails.root}/config/dropbox_config.yml",

@@ -24,6 +24,14 @@ class Advert < ActiveRecord::Base
   validates :title, presence: true
   validates :body, presence: true
   validates :price, presence: true, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, numericality: {greater_than: 0 }
+  validates :category_id, presence: true
+  validate :type_must_be_correct
+
+  def type_must_be_correct
+    unless ['sell', 'buy', 'exchange', 'service', 'loan'].include? advert_type
+      errors.add(:type_error, "invalide advert type")
+    end
+  end
 
   has_many :images, dependent: :destroy
   belongs_to :category
