@@ -37,7 +37,7 @@ bundle exec rspec
 
 ##Services
 This application using search engine ElasticSearch. To correctly working applicaton
-you should eneter `./elasticsearch-0.20.6/bin` and start elastic search server running command
+you should enter `./elasticsearch-0.20.6/bin` and start elastic search server running command
 ```
 elasticsearch -f
 ```
