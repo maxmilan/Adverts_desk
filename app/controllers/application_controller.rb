@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
+  rescue_from ActiveRecord::RecordNotFound do
+    flash[:notice] = 'Incorrect address'
+    redirect_to root_path
+  end
+
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
 

@@ -291,6 +291,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
+  minitest (= 5.4.2)
   omniauth
   omniauth-facebook
   omniauth-google-oauth2

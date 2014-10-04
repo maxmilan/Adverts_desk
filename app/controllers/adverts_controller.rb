@@ -34,7 +34,6 @@ class AdvertsController < ApplicationController
   def create
     @advert = Advert.new(advert_params)
     @advert.state = "new"
-
     current_user.adverts << @advert
     current_user.save
     respond_to do |format|
