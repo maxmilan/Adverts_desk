@@ -106,7 +106,7 @@ class AdvertsController < ApplicationController
     @advert.update_attribute(:reject_reason, params[:advert][:reject_reason])
     @advert.reject
     @advert.save
-    @advert_logger.info("Admin rejected #{@advert.title}")
+    @advert_logger.info("Admin rejected #{@advert.title} because '#{@advert.reject_reason}'")
     redirect_to admin_panel_index_path
   end
 

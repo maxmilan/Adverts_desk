@@ -67,6 +67,47 @@ RSpec.describe Advert, :type => :model do
     @advert.should_not be_valid
   end
 
+  it 'should have state new' do
+    @advert.new?.should == true
+  end
+
+  it 'should be waiting' do
+    [:new, :archive].each do |state|
+      @advert.state = state
+      @advert.wait
+      @advert.waiting?.should == true
+    end
+  end
+
+  it 'should archivate each advert' do
+    [:new, :waiting, :published, :rejected].each do |state|
+      @advert.state = state
+      @advert.send_to_archive
+      @advert.archive?.should == true
+    end
+  end
+
+  it 'should have rejected reason' do
+    @advert.wait
+    @advert.reject
+    @advert.reject_reason = nil
+    @advert.should_not be_valid
+    @advert.reject_reason = ''
+    @advert.should_not be_valid
+  end
+
+  it 'should accept waiting advert' do
+    @advert.wait
+    @advert.accept
+    @advert.published?.should == true
+  end
+
+  it 'should reject waiting advert' do
+    @advert.wait
+    @advert.reject
+    @advert.rejected?.should == true
+  end
+
   after(:each) do
     @advert.destroy
     @user.destroy

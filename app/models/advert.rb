@@ -26,12 +26,7 @@ class Advert < ActiveRecord::Base
   validates :price, presence: true, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, numericality: {greater_than: 0 }
   validates :category_id, presence: true
   validate :type_must_be_correct
-
-  def type_must_be_correct
-    unless ['sell', 'buy', 'exchange', 'service', 'loan'].include? advert_type
-      errors.add(:type_error, "invalide advert type")
-    end
-  end
+  validate :must_have_reject_reason
 
   has_many :images, dependent: :destroy
   belongs_to :category
@@ -82,6 +77,18 @@ class Advert < ActiveRecord::Base
       query { string params[:query]} unless params[:query].empty?
     end
     @result.select{|advert| advert.published?}
+  end
+
+  def type_must_be_correct
+    unless ['sell', 'buy', 'exchange', 'service', 'loan'].include? advert_type
+      errors.add(:type_error, "invalide advert type")
+    end
+  end
+
+  def must_have_reject_reason
+    if self.rejected? && (self.reject_reason.nil? || self.reject_reason.empty?)
+      errors.add(:reject_reason_error, "reject reason can't be nil" )
+    end
   end
 
 end
