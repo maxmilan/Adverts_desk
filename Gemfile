@@ -85,6 +85,3 @@ group :test do
   gem 'database_cleaner'
 end
 
-# Версию Ruby следует указывать в конце файла
-ruby "2.1.3"
-
