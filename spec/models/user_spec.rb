@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   before(:each) do
-    Role.all.each do |role|
+    Role.find_each do |role|
       role.destroy
     end
     @admin_role = Role.create(:name => "admin")

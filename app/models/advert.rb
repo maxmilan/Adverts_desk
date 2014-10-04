@@ -21,9 +21,14 @@ class Advert < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
+  scope :published, -> { where(state: :published) }
+  scope :created_desk, -> { order(created_at: :desc) }
+  scope :admin_adverts, -> { where(state: [:rejected, :published, :waiting]) }
+  scope :unpublished, -> { where(state: :waiting) }
+
   validates :title, presence: true
   validates :body, presence: true
-  validates :price, presence: true, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, numericality: {greater_than: 0 }
+  validates :price, presence: true, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0 }
   validates :category_id, presence: true
   validate :type_must_be_correct
   validate :must_have_reject_reason
@@ -64,7 +69,7 @@ class Advert < ActiveRecord::Base
   end
 
   def self.archivate_old_adverts
-    Advert.all.each do |advert|
+    Advert.find_each do |advert|
       if advert.published? && (advert.updated_at < Time.now.days_ago(1))
         advert.send_to_archive
         advert.save
@@ -74,13 +79,13 @@ class Advert < ActiveRecord::Base
 
   def self.full_search params
     @result = tire.search(load: true) do
-      query { string params[:query]} unless params[:query].empty?
+      query { string params[:query] } unless params[:query].empty?
     end
-    @result.select{|advert| advert.published?}
+    @result.select { |advert| advert.published? }
   end
 
   def type_must_be_correct
-    unless ['sell', 'buy', 'exchange', 'service', 'loan'].include? advert_type
+    unless ['sell', 'buy', 'exchange', 'service', 'loan'].include?(advert_type)
       errors.add(:type_error, "invalide advert type")
     end
   end

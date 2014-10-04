@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [:index]
   before_action :set_user, only: [:update, :destroy, :show]
 
-  # PATCH/PUT /users/:id.:format
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -16,7 +15,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/:id.:format
   def destroy
     @user.destroy
     respond_to do |format|
@@ -25,7 +23,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET/PATCH /users/:id/finish_signup
   def finish_signup
     if request.patch? && params[:user]
       if @user.update(user_params)
@@ -40,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @adverts = @user.adverts.where(state: [:rejected, :published, :waiting])
+    @adverts = @user.adverts.admin_adverts
   end
 
   private
@@ -49,8 +46,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    accessible = [ :name, :email ]
-    accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+    accessible = [:name, :email]
+    accessible << [:password, :password_confirmation] unless params[:user][:password].blank?
     params.require(:user).permit(accessible)
   end
 end

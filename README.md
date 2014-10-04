@@ -41,3 +41,6 @@ you should eneter `./elasticsearch-0.20.6/bin` and start elastic search server r
 ```
 elasticsearch -f
 ```
+
+## Actions log
+You can find information about all actions in `.\log\notifications.log`

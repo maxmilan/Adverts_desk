@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     patch :accept, on: :member
     patch :reject, on: :member
     patch :reject_reason, on: :member
-    collection { get :search}
+    get :search, on: :collection
   end
 
   resources :categories, only: [:new, :create, :destroy]

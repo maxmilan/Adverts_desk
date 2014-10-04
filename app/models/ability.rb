@@ -23,7 +23,7 @@ class Ability
     can :manage, User
 
     cannot :read, :profile
-    cannot [:edit, :create], Advert
+    cannot [:edit, :create, :update, :new], Advert
   end
 
   def user_ability user
@@ -32,19 +32,7 @@ class Ability
     can :update, User do |u|
       u == user
     end
-    can :read, User do |u|
-      u == user
-    end
-    can :update, Advert do |advert|
-      advert.try(:user) == user
-    end
-    can :destroy, Advert do |advert|
-      advert.try(:user) == user
-    end
-    can :publicate, Advert do |advert|
-      advert.try(:user) == user
-    end
-    can :archivate, Advert do |advert|
+    can [:update, :destroy, :edit, :publicate, :archivate], Advert do |advert|
       advert.try(:user) == user
     end
     can :search, Advert

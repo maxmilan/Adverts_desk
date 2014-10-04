@@ -1,4 +1,4 @@
-.well
+= content_tag 'div', class: 'well', id: "advert_#{advert.id}" do
   h3
     -if can? :read, advert
       = link_to advert.title, advert_path(advert)

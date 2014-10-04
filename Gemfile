@@ -57,6 +57,8 @@ gem 'aasm'
 
 gem 'cancancan'
 
+gem 'html2slim', group: :development
+
 gem 'pry-rails', group: [:test, :development]
 gem 'faker', group: [:test, :development]
 gem 'hirb', group: [:test, :development]

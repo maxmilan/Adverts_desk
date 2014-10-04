@@ -28,8 +28,7 @@ class User < ActiveRecord::Base
 
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable
@@ -40,7 +39,6 @@ class User < ActiveRecord::Base
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
-
     identity = Identity.find_for_oauth(auth)
     user = signed_in_resource ? signed_in_resource : identity.user
     if user.nil?
