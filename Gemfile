@@ -74,14 +74,14 @@ gem 'annotate', group: [:test, :development]
 
 gem 'whenever', :require => false
 
-gem 'ransack', '1.4.0'
+gem 'ransack', '1.4.1'
 
 gem 'tire'
 
 gem 'rspec-rails', group: [:test, :development]
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', '2.4.3'
   gem 'database_cleaner'
 end
 

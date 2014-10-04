@@ -11,6 +11,8 @@ class AdvertsController < ApplicationController
   def index
     @search = Advert.where(:state => :published).search(params[:q])
     @adverts = @search.result.paginate(:page => params[:page], :per_page => 7)
+    @categories_names = []
+    Category.all.each{|category| @categories_names << category.name}
   end
 
   # GET /adverts/1
