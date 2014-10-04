@@ -23,7 +23,7 @@ If you want to fill database by random adverts run
 '''
 rake advert_generators:generate
 '''
-To start crontab tasks you should rake the following task
+To start **crontab tasks** you should rake the following task
 '''
 rake advert_generators:update_crontab
 '''
