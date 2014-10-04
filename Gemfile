@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.5'
+gem 'rails', '4.1.6'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -17,7 +17,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '2.4.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -46,7 +46,7 @@ gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 
-gem 'devise'
+gem 'devise', '3.4.0'
 
 gem 'slim-rails'
 
@@ -74,7 +74,7 @@ gem 'annotate', group: [:test, :development]
 
 gem 'whenever', :require => false
 
-gem 'ransack'
+gem 'ransack', '1.4.0'
 
 gem 'tire'
 
@@ -86,5 +86,5 @@ group :test do
 end
 
 # Версию Ruby следует указывать в конце файла
-ruby "2.1.2"
+ruby "2.1.3"
 

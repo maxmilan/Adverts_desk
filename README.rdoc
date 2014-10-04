@@ -1,5 +1,7 @@
 == README
 {<img src="https://travis-ci.org/maxmilan/Adverts_desk.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/maxmilan/Adverts_desk]
+{<img src="https://codeclimate.com/repos/542f3078e30ba07ca000458b/badges/57c0e0881f882cf72369/gpa.svg" />}[https://codeclimate.com/repos/542f3078e30ba07ca000458b/feed]
+{<img src="https://codeclimate.com/repos/542f3078e30ba07ca000458b/badges/57c0e0881f882cf72369/gpa.svg" />}[https://codeclimate.com/repos/542f3078e30ba07ca000458b/feed]
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
