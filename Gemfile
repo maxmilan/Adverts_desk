@@ -19,7 +19,7 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '2.4.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '2.2.1'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
@@ -64,7 +64,7 @@ gem 'faker', group: [:test, :development]
 gem 'hirb', group: [:test, :development]
 gem 'annotate', group: [:test, :development]
 
-gem 'whenever', :require => false
+gem 'whenever', '0.9.3', :require => false
 
 gem 'ransack', '1.4.1'
 
@@ -77,3 +77,6 @@ group :test do
   gem 'database_cleaner'
 end
 
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'bonsai-elasticsearch-rails'
