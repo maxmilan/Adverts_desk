@@ -66,9 +66,12 @@ gem 'annotate', group: [:test, :development]
 
 gem 'whenever', '0.9.3', :require => false
 
-gem 'ransack', '1.4.1'
+gem 'elasticsearch'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'bonsai-elasticsearch-rails'
 
-gem 'tire'
+gem 'ransack', '1.4.1'
 
 gem 'rspec-rails', group: [:test, :development]
 

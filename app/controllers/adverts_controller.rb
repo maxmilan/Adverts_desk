@@ -7,7 +7,7 @@ class AdvertsController < ApplicationController
   before_filter :authenticate_user!, except: [:index]
 
   def index
-    @search = Advert.published.search(params[:q])
+    @search = Advert.published.ransack(params[:q])
     @adverts = @search.result.paginate(:page => params[:page], :per_page => 7)
     @categories_names = []
     Category.find_each { |category| @categories_names << category.name }

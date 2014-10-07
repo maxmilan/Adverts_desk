@@ -18,8 +18,8 @@
 class Advert < ActiveRecord::Base
   include AASM
 
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   scope :published, -> { where(state: :published) }
   scope :created_desk, -> { order(created_at: :desc) }
@@ -78,9 +78,8 @@ class Advert < ActiveRecord::Base
   end
 
   def self.full_search params
-    @result = tire.search(load: true) do
-      query { string params[:query] } unless params[:query].empty?
-    end
+	  Advert.import
+	  @result = Advert.search_with_elasticsearch(params[:query]).records
     @result.select { |advert| advert.published? }
   end
 
@@ -94,6 +93,10 @@ class Advert < ActiveRecord::Base
     if self.rejected? && (self.reject_reason.nil? || self.reject_reason.empty?)
       errors.add(:reject_reason_error, "reject reason can't be nil" )
     end
+  end
+
+  def self.search_with_elasticsearch(*args)
+	  __elasticsearch__.search(*args)
   end
 
 end
