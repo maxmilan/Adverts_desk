@@ -76,7 +76,3 @@ group :test do
   gem 'capybara', '2.4.3'
   gem 'database_cleaner'
 end
-
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
-gem 'bonsai-elasticsearch-rails'

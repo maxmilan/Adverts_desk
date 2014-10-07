@@ -34,7 +34,6 @@ GEM
     ansi (1.4.3)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
-    bonsai-elasticsearch-rails (0.0.4)
     builder (3.2.2)
     cancancan (1.9.2)
     capybara (2.4.3)
@@ -68,19 +67,6 @@ GEM
     diff-lcs (1.2.5)
     dropbox-sdk (1.6.4)
       json
-    elasticsearch (1.0.5)
-      elasticsearch-api (= 1.0.5)
-      elasticsearch-transport (= 1.0.5)
-    elasticsearch-api (1.0.5)
-      multi_json
-    elasticsearch-model (0.1.6)
-      activesupport (> 3)
-      elasticsearch (> 0.4)
-      hashie
-    elasticsearch-rails (0.1.6)
-    elasticsearch-transport (1.0.5)
-      faraday
-      multi_json
     erubis (2.7.0)
     execjs (2.2.1)
     faker (1.4.3)
@@ -297,14 +283,11 @@ PLATFORMS
 DEPENDENCIES
   aasm
   annotate
-  bonsai-elasticsearch-rails
   cancancan
   capybara (= 2.4.3)
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise (= 3.4.0)
-  elasticsearch-model
-  elasticsearch-rails
   faker
   hirb
   html2slim
