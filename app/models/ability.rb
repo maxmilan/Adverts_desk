@@ -20,7 +20,7 @@ class Ability
     can :destroy, Category do |category|
       category.adverts.empty?
     end
-    can :manage, User
+    can :destroy, User
 
     cannot :read, :profile
     cannot [:edit, :create, :update, :new], Advert

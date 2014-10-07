@@ -1,5 +1,7 @@
 .page-header
 = render partial: 'person', locals: {user: current_user}
+- if can? :edit, current_user
+  = link_to 'Change information', edit_user_registration_path, class: 'btn btn-default'
 h2
   |Adverts
 - if can? :create, Advert

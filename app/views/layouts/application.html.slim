@@ -45,6 +45,8 @@ html[lang="en"]
                 - else
                   li
                     = link_to 'Admin panel', admin_panel_index_path
+                  li
+                    = link_to 'Enter personal cabinet', persons_profile_path
                 li
                   = link_to 'Sign out', destroy_user_session_path, method: :delete
             - else
