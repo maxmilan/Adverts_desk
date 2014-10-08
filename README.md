@@ -3,6 +3,7 @@
 [![Code Climate](https://codeclimate.com/repos/542f3078e30ba07ca000458b/badges/57c0e0881f882cf72369/gpa.svg)](https://codeclimate.com/repos/542f3078e30ba07ca000458b/feed)
 [![Dependency Status](https://gemnasium.com/maxmilan/Adverts_desk.svg)](https://gemnasium.com/maxmilan/Adverts_desk)
 [![security](https://hakiri.io/github/maxmilan/Adverts_desk/master.svg)](https://hakiri.io/github/maxmilan/Adverts_desk/master)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

@@ -43,5 +43,4 @@ RSpec.describe Category, :type => :model do
     @user.destroy
     @user_role.destroy
   end
-
 end

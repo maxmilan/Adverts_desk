@@ -92,5 +92,4 @@ private
   def create_role
     self.role = Role.find_by_name(:user)
   end
-
 end

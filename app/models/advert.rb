@@ -98,5 +98,4 @@ class Advert < ActiveRecord::Base
   def self.search_with_elasticsearch(*args)
 	  __elasticsearch__.search(*args)
   end
-
 end

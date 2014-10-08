@@ -86,5 +86,4 @@ RSpec.describe User, :type => :model do
     @admin_role.destroy
     @user_role.destroy
   end
-
 end
