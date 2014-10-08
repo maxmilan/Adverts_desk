@@ -1,0 +1,10 @@
+/log/cron_error_log.log
+/log/cron_log.log
+/log/development.log
+/log/production.log
+/log/test.log
+/tmp
+/.idea/*
+/new
+/new.pub
+/config/database.yml

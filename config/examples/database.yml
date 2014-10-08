@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username: <username>
+  password: <password>
+
+development:
+  <<: *default
+  database: Adverts_desk_development
+
+test:
+  <<: *default
+  database: Adverts_desk_test
+
+production:
+  <<: *default
+  database: Adverts_desk_production
+  password: <%= ENV['ADVERTS_DESK_DATABASE_PASSWORD'] %>
