@@ -28,7 +28,7 @@ class Advert < ActiveRecord::Base
 
   validates :title, presence: true
   validates :body, presence: true
-  validates :price, presence: true, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0 }
+  validates :price, presence: true, format: { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0 }
   validates :category_id, presence: true
   validate :type_must_be_correct
   validate :must_have_reject_reason
@@ -39,7 +39,7 @@ class Advert < ActiveRecord::Base
 
   accepts_nested_attributes_for :images, :allow_destroy => true
 
-  aasm :column => "state" do
+  aasm column: 'state' do
     state :new
     state :waiting
     state :rejected
@@ -47,23 +47,23 @@ class Advert < ActiveRecord::Base
     state :archive
 
     event :reject do
-      transitions :from => :waiting, :to => :rejected
+      transitions from: :waiting, to: :rejected
     end
 
     event :accept do
-      transitions :from => :waiting, :to => :published
+      transitions from: :waiting, to: :published
     end
 
     event :wait do
-      transitions :from => [:new, :archive], :to => :waiting
+      transitions from: [:new, :archive], to: :waiting
     end
 
     event :send_to_archive do
-      transitions :from => [:new, :waiting, :rejected, :published], :to => :archive
+      transitions from: [:new, :waiting, :rejected, :published], to: :archive
     end
 
     event :refresh do
-      transitions :from => [:new, :waiting, :published, :rejected, :archive], :to => :new
+      transitions from: [:new, :waiting, :published, :rejected, :archive], to: :new
     end
 
   end
@@ -77,15 +77,15 @@ class Advert < ActiveRecord::Base
     end
   end
 
-  def self.full_search params
+  def self.full_search(params)
 	  Advert.import
 	  @result = Advert.search_with_elasticsearch(params[:query]).records
     @result.select { |advert| advert.published? }
   end
 
   def type_must_be_correct
-    unless ['sell', 'buy', 'exchange', 'service', 'loan'].include?(advert_type)
-      errors.add(:type_error, "invalide advert type")
+    unless %w{sell buy exchange service loan}.include?(advert_type)
+      errors.add(:type_error, 'invalide advert type')
     end
   end
 

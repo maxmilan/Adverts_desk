@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        sign_in(@user == current_user ? @user : current_user, :bypass => true)
+        sign_in(@user == current_user ? @user : current_user, bypass: true)
         format.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
         format.json { head :no_content }
       else
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     if request.patch? && params[:user]
       if @user.update(user_params)
         @user.skip_reconfirmation!
-        sign_in(@user, :bypass => true)
+        sign_in(@user, bypass: true)
         redirect_to @user, notice: 'Your profile was successfully updated.'
       else
         @show_errors = true
@@ -41,6 +41,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def set_user
     @user = User.find(params[:id])
   end

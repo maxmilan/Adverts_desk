@@ -13,19 +13,21 @@ Rails.application.routes.draw do
 
   resources :categories, only: [:new, :create, :destroy]
 
-  devise_for :users, :controllers => { registrations: 'registrations',omniauth_callbacks: 'omniauth_callbacks' }
+  devise_for :users, controllers: { registrations: 'registrations',
+                                    omniauth_callbacks: 'omniauth_callbacks' }
 
-  get '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
+  get '/users/:id/finish_signup' => 'users#finish_signup',
+      via: [:get, :patch], :as => :finish_signup
 
   resources :users do
     patch :show, on: :member
   end
 
   controller :admin_panel do
-    get 'index', as:'admin_panel_index'
+    get 'index', as: 'admin_panel_index'
   end
 
   controller :persons do
-    get 'profile', as:'persons_profile'
+    get 'profile', as: 'persons_profile'
   end
 end

@@ -1,24 +1,26 @@
 require 'rails_helper'
 
-describe "adverts interface", :type => :feature do
+describe 'adverts interface', type: :feature do
 
   before :each do
 	  Role.find_each do |role|
 		  role.destroy
 	  end
-    @admin_role = Role.create(:name => "admin")
-    @user_role = Role.create(:name => "user")
+    @admin_role = Role.create(name: 'admin')
+    @user_role = Role.create(name: 'user')
 
     @admin = User.create(name: 'Admin', surname: 'Admin', email: 'admin@advert.com', password: '82368236')
     @admin.role_id = @admin_role.id
     @admin.save
 
-    @user = User.create(name: Faker::Name.first_name, surname: Faker::Name.last_name, email: Faker::Internet.email,
+    @user = User.create(name: Faker::Name.first_name,
+                        surname: Faker::Name.last_name,
+                        email: Faker::Internet.email,
                         password: Faker::Internet.password)
     @user.role_id = @user_role.id
 
-    category_names = ['transport','realty']
-    types = ['sell', 'buy', 'exchange', 'service', 'loan']
+    category_names = %w{transport realty}
+    types = %w{sell buy exchange service loan}
 
     category_names.each do |category|
       Category.create(name: category)
@@ -39,9 +41,9 @@ describe "adverts interface", :type => :feature do
 
   def sign_in (user)
 	  visit new_user_session_path
-	  fill_in "Email", :with => @user.email
-	  fill_in "Password", :with => @user.password
-	  click_button "Sign in"
+	  fill_in 'Email', with: @user.email
+	  fill_in 'Password', with: @user.password
+	  click_button 'Sign in'
 	  expect(page).to have_content('Signed in successfully.')
   end
 
@@ -50,9 +52,9 @@ describe "adverts interface", :type => :feature do
 	  expect(page).to have_button('Create')
 	  click_button 'Create'
 	  expect(page).to have_content("can't be blank")
-	  fill_in "Title", :with => "Title"
-	  fill_in "Body", :with => "Text"
-	  fill_in "Price", :with => "23.05"
+	  fill_in 'Title', with: 'Title'
+	  fill_in 'Body', with: 'Text'
+	  fill_in 'Price', with: '23.05'
 	  click_button 'Create'
 	  expect(page).to have_content('Advert was successfully created')
   end
@@ -63,9 +65,9 @@ describe "adverts interface", :type => :feature do
 	  click_link @user.adverts[0].title
 	  expect(page).to have_content(@user.adverts[0].body)
 	  click_link 'Edit'
-	  fill_in "Body", :with => "New advert body"
+	  fill_in 'Body', with: 'New advert body'
 	  click_button 'Update'
-	  expect(page).to have_content("New advert body")
+	  expect(page).to have_content('New advert body')
   end
 
   it 'should change state' do

@@ -8,7 +8,7 @@ class AdvertsController < ApplicationController
 
   def index
     @search = Advert.published.ransack(params[:q])
-    @adverts = @search.result.paginate(:page => params[:page], :per_page => 7)
+    @adverts = @search.result.paginate(page: params[:page], per_page: 7)
     @categories_names = []
     Category.find_each { |category| @categories_names << category.name }
   end
@@ -25,7 +25,7 @@ class AdvertsController < ApplicationController
 
   def create
     @advert = Advert.new(advert_params)
-    @advert.state = "new"
+    @advert.state = 'new'
     current_user.adverts << @advert
     current_user.save
     respond_to do |format|
@@ -91,7 +91,7 @@ class AdvertsController < ApplicationController
   end
 
   def reject_reason
-    @advert.update_attributes(:reject_reason => params[:advert][:reject_reason])
+    @advert.update_attributes(reject_reason: params[:advert][:reject_reason])
     @advert.reject
     @advert.save
     @advert_logger.info("Admin rejected #{@advert.title} because '#{@advert.reject_reason}'")
@@ -104,20 +104,21 @@ class AdvertsController < ApplicationController
 
   def search
 		@adverts =
-    unless params[:query].empty?
-      Advert.full_search(params)
-    else
-      []
-    end
+      if params[:query].empty?
+        []
+      else
+        Advert.full_search(params)
+      end
   end
 
   private
+
     def set_advert
       @advert = Advert.find(params[:id])
     end
 
     def set_typenames
-      @type_names = ['sell', 'buy', 'exchange', 'service', 'loan']
+      @type_names = %w{sell buy exchange service loan}
     end
 
     def initialize_logger

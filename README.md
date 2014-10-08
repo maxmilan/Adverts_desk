@@ -50,7 +50,7 @@ You can find information about all actions in `./log/notifications.log`
 This application uses PostgresQl database. To configure database you should fill
 `./config/examples/database.yml` file with your **username** and **password**
 
-## Dropbox connnection
+## Dropbox connection
 We use Dropbox to store advert images. To use the application you should
 create new app on Dropbox. The type of app should be **app_folder**.
 When the app is created, you should fill the neccessary information about it in `./config/examples/dropbox_config.yml`

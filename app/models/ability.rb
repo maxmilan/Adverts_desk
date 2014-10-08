@@ -12,7 +12,7 @@ class Ability
     end
   end
 
-  def admin_ability user
+  def admin_ability(user)
     user_ability user
     can :read, :admin_panel
     can [:accept, :reject, :reject_reason], Advert
@@ -26,7 +26,7 @@ class Ability
     cannot [:edit, :create, :update, :new], Advert
   end
 
-  def user_ability user
+  def user_ability(user)
     can :read, :all
     can [:create], Advert
     can :update, User do |u|

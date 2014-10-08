@@ -1,13 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Role, :type => :model do
+RSpec.describe Role, type: :model do
   before(:each) do
     Role.find_each do |role|
       role.destroy
     end
-    @admin_role = Role.create(:name => "admin")
-    @user_role = Role.create(:name => "user")
-    @user = User.create(name: Faker::Name.first_name, surname: Faker::Name.last_name, email: Faker::Internet.email,
+    @admin_role = Role.create(name: 'admin')
+    @user_role = Role.create(name: 'user')
+    @user = User.create(name: Faker::Name.first_name,
+                        surname: Faker::Name.last_name, email: Faker::Internet.email,
                         password: Faker::Internet.password, role_id: @user_role.id)
   end
 

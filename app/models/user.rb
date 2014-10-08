@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :surname, presence: true
   validates :email, uniqueness: true, presence: true
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  validates_format_of :email, without: TEMP_EMAIL_REGEX, on: :update
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
     identity = Identity.find_for_oauth(auth)
@@ -44,19 +44,19 @@ class User < ActiveRecord::Base
     if user.nil?
       email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
       email = auth.info.email if email_is_verified
-      user = User.where(:email => email).first if email
+      user = User.where(email: email).first if email
       if user.nil?
-        if auth.provider.eql? "facebook"
+        if auth.provider.eql? 'facebook'
           @name = auth.extra.raw_info.first_name
           @surname = auth.extra.raw_info.last_name
-        elsif auth.provider.eql? "twitter"
+        elsif auth.provider.eql? 'twitter'
           @full_name = auth.extra.raw_info.name
-          @name = @full_name[ 0, @full_name.index(' ') ]
-          @surname = @full_name[ @full_name.index(' ') + 1, @full_name.length - 1 ]
-        elsif auth.provider.eql? "vkontakte"
+          @name = @full_name[0, @full_name.index(' ')]
+          @surname = @full_name[@full_name.index(' ') + 1, @full_name.length - 1]
+        elsif auth.provider.eql? 'vkontakte'
           @name = auth.extra.raw_info.first_name
           @surname = auth.extra.raw_info.last_name
-        elsif auth.provider.eql? "google_oauth2"
+        elsif auth.provider.eql? 'google_oauth2'
           @name = auth.extra.raw_info.given_name
           @surname = auth.extra.raw_info.family_name
         end
@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
             name: @name,
             surname: @surname,
             email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-            password: Devise.friendly_token[0,20]
+            password: Devise.friendly_token[0, 20]
         )
         user.save!
       end
@@ -77,18 +77,19 @@ class User < ActiveRecord::Base
   end
 
   def email_verified?
-    self.email && self.email !~ TEMP_EMAIL_REGEX
+    email && email !~ TEMP_EMAIL_REGEX
   end
 
   def admin?
-    !self.role.nil? && self.role.name.eql?('admin')
+    !role.nil? && role.name.eql?('admin')
   end
 
   def user?
-    !self.role.nil? && self.role.name.eql?('user')
+    !role.nil? && role.name.eql?('user')
   end
 
 private
+
   def create_role
     self.role = Role.find_by_name(:user)
   end
