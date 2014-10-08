@@ -55,7 +55,7 @@ class AdvertsController < ApplicationController
   end
 
   def destroy
-	  @advert_loger.info("#{current_user.email} destroyed #{@advert.title}")
+	  @advert_logger.info("#{current_user.email} destroyed #{@advert.title}")
     @advert.destroy
     respond_to do |format|
       format.html { redirect_to persons_profile_url, notice: 'Advert was successfully destroyed' }

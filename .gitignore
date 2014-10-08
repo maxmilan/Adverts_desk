@@ -8,3 +8,7 @@
 /new
 /new.pub
 /config/database.yml
+/config/dropbox_config.yml
+
+# Ignore application configuration
+/config/application.yml

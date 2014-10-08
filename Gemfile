@@ -79,3 +79,5 @@ group :test do
   gem 'capybara', '2.4.3'
   gem 'database_cleaner'
 end
+
+gem 'figaro'
