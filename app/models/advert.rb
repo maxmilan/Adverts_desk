@@ -26,12 +26,11 @@ class Advert < ActiveRecord::Base
   scope :admin_adverts, -> { where(state: [:rejected, :published, :waiting]) }
   scope :unpublished, -> { where(state: :waiting) }
 
-  validates :title, presence: true
-  validates :body, presence: true
-  validates :price, presence: true, format: { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0 }
-  validates :category_id, presence: true
+  validates :title,:body, :price, presence: true
+  validates :price, format: { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0 }
+  validates :category, presence: true
   validate :type_must_be_correct
-  validate :must_have_reject_reason
+  validates :reject_reason, presence: true, if: :advert_rejected?
 
   has_many :images, dependent: :destroy
   belongs_to :category
@@ -89,10 +88,8 @@ class Advert < ActiveRecord::Base
     end
   end
 
-  def must_have_reject_reason
-    if self.rejected? && (self.reject_reason.nil? || self.reject_reason.empty?)
-      errors.add(:reject_reason_error, "reject reason can't be nil" )
-    end
+  def advert_rejected?
+    self.rejected?
   end
 
   def self.search_with_elasticsearch(*args)
