@@ -1,2 +1,4 @@
-$(".categories").append("<%= escape_javascript(render partial: 'admin_panel/category', locals: {category: @category})%>");
-$('#category_name')[0].value = '';
+var $next_link = $('ul.pagination.pagination').find('li.next.disabled')
+if($next_link.length != 0)
+  $(".categories").append("<%= escape_javascript(render partial: 'admin_panel/category', locals: {category: @category})%>");
+$('#category_name').val("");

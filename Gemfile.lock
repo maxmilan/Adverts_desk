@@ -303,7 +303,7 @@ DEPENDENCIES
   bonsai-elasticsearch-rails
   cancancan
   capybara (= 2.4.3)
-  coffee-rails (~> 4.0.0)
+  coffee-rails
   database_cleaner
   devise (= 3.4.0)
   elasticsearch

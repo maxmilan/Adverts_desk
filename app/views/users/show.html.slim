@@ -1,6 +1,6 @@
 .page-header
 = render partial: 'persons/person', locals: {user: @user}
-- if current_user.admin?
+- if can? :accept, Advert
   h2 Waiting, rejected and published adverts
   = render partial:'persons/advert', collection: @adverts
 .action_buttons
