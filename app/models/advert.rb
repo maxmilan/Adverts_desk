@@ -26,9 +26,8 @@ class Advert < ActiveRecord::Base
   scope :admin_adverts, -> { where(state: [:rejected, :published, :waiting]) }
   scope :unpublished, -> { where(state: :waiting) }
 
-  validates :title,:body, :price, presence: true
+  validates :title,:body, :price, :category, presence: true
   validates :price, format: { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0 }
-  validates :category, presence: true
   validate :type_must_be_correct
   validates :reject_reason, presence: true, if: :advert_rejected?
 
