@@ -41,29 +41,29 @@ class User < ActiveRecord::Base
   def self.find_for_oauth(auth, signed_in_resource = nil)
     identity = Identity.find_for_oauth(auth)
     user = signed_in_resource ? signed_in_resource : identity.user
-    if user.nil?
+    unless user
       email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
       email = auth.info.email if email_is_verified
       user = User.where(email: email).first if email
-      if user.nil?
-        if auth.provider.eql? 'facebook'
+      unless user
+				case auth.provider
+        when 'facebook'
           @name = auth.extra.raw_info.first_name
           @surname = auth.extra.raw_info.last_name
-        elsif auth.provider.eql? 'twitter'
+        when 'twitter'
           @full_name = auth.extra.raw_info.name
-          @name = @full_name[0, @full_name.index(' ')]
-          @surname = @full_name[@full_name.index(' ') + 1, @full_name.length - 1]
-        elsif auth.provider.eql? 'vkontakte'
+          @name, @surname = @full_name.split(' ')
+        when 'vkontakte'
           @name = auth.extra.raw_info.first_name
           @surname = auth.extra.raw_info.last_name
-        elsif auth.provider.eql? 'google_oauth2'
+        when 'google_oauth2'
           @name = auth.extra.raw_info.given_name
           @surname = auth.extra.raw_info.family_name
         end
         user = User.new(
             name: @name,
             surname: @surname,
-            email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+            email: email || "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
             password: Devise.friendly_token[0, 20]
         )
         user.save!
@@ -81,11 +81,11 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    !role.nil? && role.name.eql?('admin')
+    role && role.name == 'admin'
   end
 
   def user?
-    !role.nil? && role.name.eql?('user')
+    role && role.name == 'user'
   end
 
 private

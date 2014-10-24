@@ -9,8 +9,7 @@ class AdvertsController < ApplicationController
   def index
     @search = Advert.published.ransack(params[:q])
     @adverts = @search.result.paginate(page: params[:page], per_page: 7)
-    @categories_names = []
-    Category.find_each { |category| @categories_names << category.name }
+    @categories_names = Category.pluck(:name)
   end
 
   def show
@@ -26,8 +25,8 @@ class AdvertsController < ApplicationController
   def create
     @advert = Advert.new(advert_params)
     @advert.state = 'new'
-    current_user.adverts << @advert
-    current_user.save
+    @advert.user = current_user
+    @advert.save
     respond_to do |format|
       if @advert.save
         format.html { redirect_to persons_profile_url, notice: 'Advert was successfully created' }
