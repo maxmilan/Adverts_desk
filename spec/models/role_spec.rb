@@ -1,39 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do
-  before(:each) do
-    Role.find_each do |role|
-      role.destroy
-    end
-    @admin_role = Role.create(name: 'admin')
-    @user_role = Role.create(name: 'user')
-    @user = User.create(name: Faker::Name.first_name,
-                        surname: Faker::Name.last_name, email: Faker::Internet.email,
-                        password: Faker::Internet.password, role_id: @user_role.id)
-  end
+	let(:user_role){FactoryGirl.create(:role)}
+	let(:admin_role){FactoryGirl.create(:role, name: 'admin')}
 
   it 'should be valid' do
-    @user_role.should be_valid
-    @admin_role.should be_valid
+    expect(user_role).to be_valid
+    expect(admin_role).to be_valid
   end
 
   it 'should have name' do
-    @user_role.name = nil
-    @user_role.should_not be_valid
-    @user_role.name = ''
-    @user_role.should_not be_valid
+    user_role.name = nil
+    expect(user_role).not_to be_valid
+    user_role.name = ''
+    expect(user_role).not_to be_valid
   end
 
   it 'should have unique name' do
-    @other_role = Role.create(name: 'admin')
-    @other_role.should_not be_valid
-    @other_role.name = 'other'
-    @other_role.should be_valid
-  end
-
-  after(:each) do
-    @user.destroy
-    @user_role.destroy
-    @admin_role.destroy
+	  other_role = admin_role.dup
+    expect(other_role).not_to be_valid
+    other_role.name = 'other'
+    expect(other_role).to be_valid
   end
 end

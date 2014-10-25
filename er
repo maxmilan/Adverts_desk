@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /home/max/RailsProject/Adverts_desk/spec/models/user_spec.rb @ line 28 :
+
+    [1;34m23[0m:     user.should_not be_valid
+    [1;34m24[0m:   [32mend[0m
+    [1;34m25[0m: 
+    [1;34m26[0m:   it [31m[1;31m'[0m[31mshould have unique email[1;31m'[0m[31m[0m [32mdo[0m
+    [1;34m27[0m:     other_user = user.dup
+ => [1;34m28[0m:     binding.pry
+    [1;34m29[0m: 	  expect(other_user).not_to be_valid
+    [1;34m30[0m:   [32mend[0m
+    [1;34m31[0m: 
+    [1;34m32[0m: 	let([33m:incorrect_emails[0m){[31m[1;31m%w{[0m[31mnewjnfewfnjwefn feuwfn@ejfe enjfen@enf.[1;31m}[0m[31m[0m}
+    [1;34m33[0m: 	let([33m:correct_emails[0m){[31m[1;31m%w{[0m[31mwenfj@nwejf.ru EDJNDWEJND@efmekf.ru[1;31m}[0m[31m[0m}
+

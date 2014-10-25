@@ -29,7 +29,7 @@ RSpec.describe Category, type: :model do
 
   describe 'Category uniquness validation' do
 	  it 'should have unique name' do
-		  other_category.name = category.name
+		  other_category = category.dup
 	    expect(other_category).not_to be_valid
 	  end
 	end
