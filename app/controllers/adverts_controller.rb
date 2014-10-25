@@ -41,7 +41,6 @@ class AdvertsController < ApplicationController
   end
 
   def update
-		destroy_empty_images(advert_params)
     @advert.update_attributes(advert_params)
     @advert.refresh
     respond_to do |format|
@@ -92,6 +91,14 @@ class AdvertsController < ApplicationController
     end
   end
 
+  def remove_image
+		@image = Image.find(params[:image_id])
+		@image.destroy
+		respond_to do |format|
+			format.js
+		end
+  end
+
   def reject_reason
     @advert.update_attributes(reject_reason: params[:advert][:reject_reason])
     @advert.reject
@@ -101,7 +108,6 @@ class AdvertsController < ApplicationController
   end
 
   def reject
-
   end
 
   def search
@@ -124,9 +130,9 @@ class AdvertsController < ApplicationController
     end
 
     def destroy_empty_images(advert_params)
-			if advert_params[:images_attributes]
-	      advert_params[:images_attributes] = advert_params[:images_attributes].delete_if{|key,value|value.empty?}
-      end
+	      advert_params[:images_attributes] =
+			      advert_params[:images_attributes].delete_if{|key,value|value.empty?} if advert_params[:images_attributes]
+	      advert_params
 		end
 
     def initialize_logger
@@ -134,6 +140,6 @@ class AdvertsController < ApplicationController
     end
 
     def advert_params
-      params.require(:advert).permit(:title, :advert_type, :category_id, :body, :price, images_attributes: [:asset])
+      destroy_empty_images params.require(:advert).permit(:title, :advert_type, :category_id, :body, :price, images_attributes: [:asset])
     end
 end

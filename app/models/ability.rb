@@ -32,11 +32,10 @@ class Ability
     can :update, User do |u|
       u == user
     end
-    can [:update, :destroy, :edit, :publicate, :archivate], Advert do |advert|
+    can [:update, :destroy, :edit, :publicate, :archivate, :remove_image], Advert do |advert|
       advert.try(:user) == user
     end
     can :search, Advert
-
     cannot :read, :admin_panel
   end
 

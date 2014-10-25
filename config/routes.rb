@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     patch :accept, on: :member
     patch :reject, on: :member
     patch :reject_reason, on: :member
+    patch :remove_image, on: :collection
     get :search, on: :collection
   end
 
