@@ -16,8 +16,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function()
-{
+$(document).ready(function(){
     var $textarea= $('textarea');
     $textarea.height($textarea.get(0).scrollHeight);
     $textarea.on('keyup input', function(){
@@ -25,5 +24,10 @@ $(document).ready(function()
         $this.height(1);
         $this.height(this.scrollHeight);
     });
+});
 
+$(document).on('click', 'input.btn-default', function(){
+    var $last_id = $('#0').parent().children().last().prev().attr('id');
+    var $id = parseInt($last_id,10) + 1;
+    $('#' + $last_id).after('<input id="' + $id + '" type="file" name="advert[images_attributes][' + $id +'][asset]">');
 });

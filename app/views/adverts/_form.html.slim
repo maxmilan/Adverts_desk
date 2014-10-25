@@ -7,6 +7,15 @@
     = f.input :body, as: :text, input_html: { size:'60'}
     = f.input :price, input_html: { min:'0', value: number_with_precision(f.object.price, precision: 2), step: '0.01'}
     = f.label 'Download images'
-    = f.file_field 'advert_images_asset', multiple: true, name: "advert[images_attributes][][asset]"
+    div#new_photos
+      = f.simple_fields_for :images do |image|
+        - if image.object.new_record?
+          = image.file_field :asset, id:'0'
+      input[class='btn btn-default' value='Add image' name='add_img']
+    div#old_photos
+    = f.simple_fields_for :images do |image|
+      - unless image.object.new_record?
+        div.thumbnail
+          = link_to( image_tag(image.object.asset.url(:small)), image.object.asset.url(:medium) )
   .form-actions
     = f.button :submit

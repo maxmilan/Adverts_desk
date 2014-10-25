@@ -17,9 +17,11 @@ class AdvertsController < ApplicationController
 
   def new
     @advert = Advert.new
+    @advert.images.build
   end
 
   def edit
+	  @advert.images.build
   end
 
   def create
@@ -39,6 +41,7 @@ class AdvertsController < ApplicationController
   end
 
   def update
+		destroy_empty_images(advert_params)
     @advert.update_attributes(advert_params)
     @advert.refresh
     respond_to do |format|
@@ -119,6 +122,12 @@ class AdvertsController < ApplicationController
     def set_typenames
       @type_names = %w{sell buy exchange service loan}
     end
+
+    def destroy_empty_images(advert_params)
+			if advert_params[:images_attributes]
+	      advert_params[:images_attributes] = advert_params[:images_attributes].delete_if{|key,value|value.empty?}
+      end
+		end
 
     def initialize_logger
 	    @advert_logger ||= Logger.new("#{Rails.root}/log/notifications.log")

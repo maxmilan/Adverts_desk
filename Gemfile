@@ -10,13 +10,13 @@ gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails'
+gem 'coffee-rails', '4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '2.4.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.2.2'
+gem 'jbuilder', '2.2.4'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -24,7 +24,7 @@ gem 'spring', group: :development
 # Using minitest for testing
 gem 'minitest', '5.4.2', group: [:development, :test]
 
-gem "rails_12factor", group: :production
+gem "rails_12factor", '0.0.3', group: :production
 # Use simpleform to manage forms
 gem 'simple_form'
 
@@ -45,7 +45,7 @@ gem 'paperclip-dropbox'
 # Use omniauth gems for social network authorization
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'omniauth-twitter'
+gem 'omniauth-twitter', '1.1.0'
 gem 'omniauth-vkontakte'
 gem 'omniauth-google-oauth2'
 # Use aasm to configure state mechanism
@@ -63,9 +63,9 @@ gem 'hirb', group: [:test, :development]
 # Use annotate to annotate models
 gem 'annotate', group: [:test, :development]
 # Use whenever for shedule tasks
-gem 'whenever', '0.9.3', :require => false
+gem 'whenever', '0.9.4', :require => false
 # Use elasticsearch to full text search
-gem 'elasticsearch'
+gem 'elasticsearch', '1.0.6'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'bonsai-elasticsearch-rails'
@@ -74,7 +74,7 @@ gem 'ransack', '1.4.1'
 # Use rspec and capybara for testing
 gem 'rspec-rails', group: [:test, :development]
 group :test do
-  gem 'capybara', '2.4.3'
+  gem 'capybara', '2.4.4'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
