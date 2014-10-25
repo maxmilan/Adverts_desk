@@ -75,6 +75,7 @@ gem 'ransack', '1.4.1'
 gem 'rspec-rails', group: [:test, :development]
 group :test do
   gem 'capybara', '2.4.3'
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
 # Use figaro to incapsulate environment variables
